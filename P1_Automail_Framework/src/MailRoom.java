@@ -2,7 +2,7 @@ import java.util.*;
 
 import static java.lang.String.format;
 
-public class MailRoom {
+public class sMailRoom {
     public enum Mode {CYCLING, FLOORING}
     List<Letter>[] waitingForDelivery;
     private final int numRobots;
