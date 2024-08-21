@@ -1,6 +1,13 @@
 import static java.lang.String.format;
 
-public class Building {
+/**
+ * Building class to present building in auto-mail system
+ *
+ * @Author: Miles Li; Skylar Khant; Lam Nguyen
+ * @Since: 21/08/2024
+ */
+public class Building
+{
     private static boolean initialised = false;
     private static Building singleton = null;
     final public int NUMFLOORS;
@@ -13,7 +20,26 @@ public class Building {
     private static int NUMF;
     private static int NUMR;
 
-    public static void initialise(int numFloors, int numRooms) {
+    /**
+     * Constructor of Building Singleton
+     */
+    private Building()
+    {
+        // System.out.println("Building constructor");
+        this.NUMFLOORS = NUMF;
+        this.NUMROOMS = NUMR;
+        occupied = new boolean[NUMFLOORS+1][NUMROOMS+2]; // robot space in building, initialised to zero (false)
+        bg = new BuildingGrid(NUMFLOORS, NUMROOMS);
+    }
+
+    /**
+     * Initialise the Building
+     *
+     * @param numFloors: The Number of floors
+     * @param numRooms: The number of Rooms
+     */
+    public static void initialise(int numFloors, int numRooms)
+    {
         assert !initialised : "Attempt to reinitialise Building";
         assert numFloors > 0 : "Non-positive numFloors";
         assert numRooms > 0 : "Non-positive numRooms";
@@ -22,36 +48,54 @@ public class Building {
         initialised = true;
     }
 
-    private Building() {
-        // System.out.println("Building constructor");
-        this.NUMFLOORS = NUMF;
-        this.NUMROOMS = NUMR;
-        occupied = new boolean[NUMFLOORS+1][NUMROOMS+2]; // robot space in building, initialised to zero (false)
-        bg = new BuildingGrid(NUMFLOORS, NUMROOMS);
-    }
 
-    public static Building getBuilding() {
-        // System.out.print("getBuilding ");
-        if (singleton == null) {
-            // System.out.println("null");
+    /**
+     * Create the singleton Building
+     *
+     * @return Building
+     */
+    public static Building getBuilding()
+    {
+        if (singleton == null)
+        {
             assert initialised : "Failure to initialise Building";
             singleton = new Building();
-        } else {
-            // System.out.println("not null");
         }
         return singleton;
     }
 
-    boolean isOccupied(int floor, int room) {
+
+    /**
+     * Check if the specific room is occupied
+     *
+     * @param floor: floor number
+     * @param room: room number
+     * @return boolean: if the room is occupie
+     */
+    boolean isOccupied(int floor, int room)
+    {
         return occupied[floor][room];
     }
 
-    void remove(int floor, int room) {
+    /**
+     * Remove the robot from the specific room
+     *
+     * @param floor: floor number
+     * @param room: room number
+     */
+    void remove(int floor, int room)
+    {
         assert occupied[floor][room] : format("remove from unoccupied position floor=%d; room=%d", floor, room);
         occupied[floor][room] = false;
         bg.update(floor, room, "");  // Display
     }
 
+    /**
+     *
+     * @param floor
+     * @param room
+     * @param id
+     */
     void place(int floor, int room, String id) {
         assert !occupied[floor][room] : format("place at occupied position floor=%d; room=%d", floor, room);
         occupied[floor][room] = true;
