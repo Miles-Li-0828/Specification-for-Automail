@@ -3,7 +3,14 @@
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
-public class Simulation {
+/**
+ * The controller for the whole system: Simulation
+ *
+ * @Author: Miles Li; Skylar Khant; Lam Nguyen
+ * @Since: 22/08/2024
+ */
+public class Simulation
+{
     private static final Map<Integer, List<Letter>> waitingToArrive = new HashMap<>();
     private static int time = 0;
     public final int endArrival;
@@ -13,7 +20,8 @@ public class Simulation {
     private static int deliveredCount = 0;
     private static int deliveredTotalTime = 0;
 
-    public static void deliver(Letter mailItem) {
+    public static void deliver(Letter mailItem)
+    {
         System.out.println("Delivered: " + mailItem);
         deliveredCount++;
         deliveredTotalTime += now() - mailItem.myArrival();
