@@ -87,11 +87,11 @@ public class MailRoom
 
 
     /**
-     * ？？
+     * ??
      *
      * @param items: Items
      */
-    void arrive(List<Letter> items)
+    public void arrive(List<Letter> items)
     {
         for (Letter item : items)
         {
@@ -104,7 +104,8 @@ public class MailRoom
     /**
      * Time tick simulation
      */
-    public void tick() {
+    public void tick()
+    {
         // Simulation time unit
         for (Robot activeRobot : activeRobots)
         {
