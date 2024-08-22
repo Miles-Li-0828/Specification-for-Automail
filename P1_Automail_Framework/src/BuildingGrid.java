@@ -53,8 +53,8 @@ public class BuildingGrid
         for (int i = 2; i < NUMROOMS+4-2; i++)
             for (int j = 0; j < NUMFLOORS; j++)
             {
-            objects[j][i] = format(" Rm %d.%d", NUMFLOORS-j, i-1); // door
-        }
+                objects[j][i] = format(" Rm %d.%d", NUMFLOORS-j, i-1); // door
+            }
 
         objects[NUMFLOORS][2] = "Mailroom ...";
 
