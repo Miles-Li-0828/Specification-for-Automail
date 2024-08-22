@@ -3,7 +3,14 @@
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
-public class Simulation {
+/**
+ * The controller for the whole system: Simulation
+ *
+ * @Author: Miles Li; Skylar Khant; Lam Nguyen
+ * @Since: 22/08/2024
+ */
+public class Simulation
+{
     private static final Map<Integer, List<Letter>> waitingToArrive = new HashMap<>();
     private static int time = 0;
     public final int endArrival;
@@ -13,24 +20,13 @@ public class Simulation {
     private static int deliveredCount = 0;
     private static int deliveredTotalTime = 0;
 
-    public static void deliver(Letter mailItem) {
-        System.out.println("Delivered: " + mailItem);
-        deliveredCount++;
-        deliveredTotalTime += now() - mailItem.myArrival();
-    }
-
-    void addToArrivals(int arrivalTime, Letter item) {
-        System.out.println(item.toString());
-        if (waitingToArrive.containsKey(arrivalTime)) {
-            waitingToArrive.get(arrivalTime).add(item);
-        } else {
-            LinkedList<Letter> items = new LinkedList<>();
-            items.add(item);
-            waitingToArrive.put(arrivalTime, items);
-        }
-    }
-
-    Simulation(Properties properties) {
+    /**
+     * Constructor
+     *
+     * @param properties: properties
+     */
+    Simulation(Properties properties)
+    {
         int seed = Integer.parseInt(properties.getProperty("seed"));
         Random random = new Random(seed);
         this.endArrival = Integer.parseInt(properties.getProperty("mail.endarrival"));
@@ -47,13 +43,17 @@ public class Simulation {
         Building.initialise(numFloors, numRooms);
         Building building = Building.getBuilding();
         mailroom = new MailRoom(building.NUMFLOORS, numRobots);
-        for (int i = 0; i < numLetters; i++) { //Generate letters
+        for (int i = 0; i < numLetters; i++)
+        {
+            //Generate letters
             int arrivalTime = random.nextInt(endArrival)+1;
             int floor = random.nextInt(building.NUMFLOORS)+1;
             int room = random.nextInt(building.NUMROOMS)+1;
             addToArrivals(arrivalTime, new Letter(floor, room, arrivalTime));
         }
-        for (int i = 0; i < numParcels; i++) { // Generate parcels
+        for (int i = 0; i < numParcels; i++)
+        {
+            // Generate parcels
             int arrivalTime = random.nextInt(endArrival)+1;
             int floor = random.nextInt(building.NUMFLOORS)+1;
             int room = random.nextInt(building.NUMROOMS)+1;
@@ -62,23 +62,74 @@ public class Simulation {
         }
     }
 
+    /**
+     * Deliver the item
+     * * Should be in the Robot class *
+     *
+     * @param mailItem: Item
+     */
+    public static void deliver(Letter mailItem)
+    {
+        System.out.println("Delivered: " + mailItem);
+        deliveredCount++;
+        deliveredTotalTime += now() - mailItem.myArrival();
+    }
+
+    /**
+     * Mark the items which are arrived already
+     *
+     * @param arrivalTime: arrival time
+     * @param item: specific item
+     */
+    void addToArrivals(int arrivalTime, Letter item)
+    {
+        System.out.println(item.toString());
+        if (waitingToArrive.containsKey(arrivalTime))
+        {
+            waitingToArrive.get(arrivalTime).add(item);
+        }
+        else
+        {
+            LinkedList<Letter> items = new LinkedList<>();
+            items.add(item);
+            waitingToArrive.put(arrivalTime, items);
+        }
+    }
+
+    /**
+     * The time now
+     *
+     * @return int: current time
+     */
     public static int now() { return time; }
 
-    void step() {
+    /**
+     * What will happen in every time step
+     */
+    void step()
+    {
         // External events
         if (waitingToArrive.containsKey(time))
             mailroom.arrive(waitingToArrive.get(time));
         // Internal events
         mailroom.tick();
-        }
+    }
 
-    void run() {
-        while (time++ <= endArrival || mailroom.someItems()) {
+    /**
+     * Run the simulation
+     */
+    void run()
+    {
+        while (time++ <= endArrival || mailroom.hasItemsForDelivery())
+        {
             step();
-            try {
+            try
+            {
                 TimeUnit.MILLISECONDS.sleep(timeout);
-            } catch (InterruptedException e) {
-                // System.out.printf("Sleep interrupted!\n");
+            }
+            catch (InterruptedException e)
+            {
+                System.out.println("Sleep interrupted!");
             }
         }
         System.out.printf("Finished: Items delivered = %d; Average time for delivery = %.2f%n",

@@ -5,36 +5,56 @@ import javax.swing.table.TableModel;
 
 import static java.lang.String.format;
 
-public class BuildingGrid {
-    JFrame f;
-    TableModel tm;
-    BuildingGrid(int NUMFLOORS, int NUMROOMS){
+/**
+ * Used to present Building grids GUI
+ *
+ * @Author: Miles Li; Skylar Khant; Lam Nguyen
+ * @Since: 21/08/2024
+ */
+public class BuildingGrid
+{
+    // Information hiding!
+    private final JFrame f;
+    private final TableModel tm;
+
+    /**
+     * Constructor of BuildingGrid
+     *
+     * @param NUMFLOORS: The number of floors
+     * @param NUMROOMS: The number of rooms
+     */
+    BuildingGrid(int NUMFLOORS, int NUMROOMS)
+    {
         f=new JFrame();
-        Object objects[][];
-        String headings[];
+        Object[][] objects;
+        String[] headings;
 
         objects = new Object[NUMFLOORS+1][NUMROOMS+4];
         headings = new String[NUMROOMS+4];
 
         headings[0] = "v Floor | Room >";
         headings[NUMROOMS+4-1] = "< Room | Floor v";
-        for (int i = 0; i < NUMROOMS+2; i++) {
+        for (int i = 0; i < NUMROOMS+2; i++)
+        {
             headings[i+1] = Integer.toString(i);
         }
 
-        for (int i = 0; i < NUMFLOORS+1; i++) {
+        for (int i = 0; i < NUMFLOORS+1; i++)
+        {
             objects[NUMFLOORS+1-i-1][0] = Integer.toString(i);
             objects[NUMFLOORS+1-i-1][NUMROOMS+4-1] = Integer.toString(i);
         }
 
-        for (int i = 0; i < NUMFLOORS+1; i++) {
+        for (int i = 0; i < NUMFLOORS+1; i++)
+        {
             objects[i][1] = "#"; // ladder
             objects[i][NUMROOMS+4-2] = "#"; // ladder
         }
         for (int i = 2; i < NUMROOMS+4-2; i++)
-            for (int j = 0; j < NUMFLOORS; j++) {
-            objects[j][i] = format(" Rm %d.%d", NUMFLOORS-j, i-1); // door
-        }
+            for (int j = 0; j < NUMFLOORS; j++)
+            {
+                objects[j][i] = format(" Rm %d.%d", NUMFLOORS-j, i-1); // door
+            }
 
         objects[NUMFLOORS][2] = "Mailroom ...";
 
@@ -61,11 +81,24 @@ public class BuildingGrid {
 
         }
 
-    void update(int floor, int room, String s) {
+    /**
+     * Update the grid by time
+     * ** Need to implement flooring here**
+     *
+      * @param floor: floor number
+     * @param room: room number
+     * @param s: Robot name
+     */
+    void update(int floor, int room, String s)
+    {
         String sfinal;
-        if (room == 0 || room == Building.getBuilding().NUMROOMS+1) {
+        // Move up in the lift
+        if (room == 0 || room == Building.getBuilding().NUMROOMS+1)
+        {
             sfinal = s.isEmpty() ? "#" : s;  // ladder
-        } else {
+        }
+        else
+        {
             String tail = s.isEmpty() ? "" : format(" [%s]", s);
             sfinal = format(" Rm %d.%d%s", floor, room, tail); // door
         }

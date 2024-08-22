@@ -91,39 +91,56 @@ public class Building
     }
 
     /**
+     * Place a robot in a specific room
      *
-     * @param floor
-     * @param room
-     * @param id
+     * @param floor: floor number
+     * @param room: room number
+     * @param id: robot id
      */
-    void place(int floor, int room, String id) {
+    void place(int floor, int room, String id)
+    {
         assert !occupied[floor][room] : format("place at occupied position floor=%d; room=%d", floor, room);
         occupied[floor][room] = true;
         bg.update(floor, room, id);  // Display
     }
 
-    void move(int floor, int room, Direction direction, String id) {
+    /**
+     * Move a robot to a specific direction
+     * ** This method should not belong to Building: high coupling; low cohesion;
+     *
+     * @param floor: the floor number
+     * @param room: the room number
+     * @param direction: direction of moving
+     * @param id: Robot id
+     */
+    void move(int floor, int room, Direction direction, String id)
+    {
         assert occupied[floor][room] : format("move from unoccupied position floor=%d; room=%d", floor, room);
         int dfloor, droom;
-        switch (direction) {
-            case UP -> {
+        switch (direction)
+        {
+            case UP ->
+            {
                 assert floor < NUMFLOORS + 1 : format("attempt to move above building floor=%d; room=%d", floor, room);
                 assert room == 0 || room == NUMROOMS + 1 : format("attempt to move up through ceiling floor=%d; room=%d", floor, room);
                 dfloor = floor + 1;
                 droom = room;
             }
-            case DOWN -> {
+            case DOWN ->
+            {
                 assert floor > 0 : format("attempt to move below mailroom floor=%d; room=%d", floor, room);
                 assert room == 0 || room == NUMROOMS + 1 : format("attempt to move down through floor floor=%d; room=%d", floor, room);
                 dfloor = floor - 1;
                 droom = room;
             }
-            case LEFT -> {
+            case LEFT ->
+            {
                 assert room > 1 : format("attempt to move left outside building floor=%d; room=%d", floor, room);
                 dfloor = floor;
                 droom = room - 1;
             }
-            case RIGHT -> {
+            case RIGHT ->
+            {
                 assert room < NUMROOMS + 1 : format("attempt to move right outside building floor=%d; room=%d", floor, room);
                 dfloor = floor;
                 droom = room + 1;
