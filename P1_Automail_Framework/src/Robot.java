@@ -15,18 +15,16 @@ public class Robot
     final private String id;
     private int floor;
     private int room;
-    final private MailRoom mailroom;
+    //final private MailRoom mailroom;
     final private List<Letter> letters = new ArrayList<>();
 
     /**
      * Constructor
-     *
-     * @param mailroom: create a robot in specific mail room
      */
-    public Robot(MailRoom mailroom)
+    public Robot()
     {
         this.id = "R" + count++;
-        this.mailroom = mailroom;
+        //this.mailroom = mailroom;
     }
 
     public String toString()
@@ -59,6 +57,7 @@ public class Robot
 
     /**
      * Move a robot
+     * 肯定要改
      *
      * @param direction: direction
      */
@@ -82,7 +81,7 @@ public class Robot
             if (floor == 0)
             {
                 System.out.printf("About to return: " + this + "\n");
-                mailroom.robotReturn(this);
+                //mailroom.robotReturn(this);
             }
         }
     }
