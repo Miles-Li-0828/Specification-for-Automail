@@ -52,7 +52,9 @@ public class RobotsController
         for (Robot activeRobot : activeRobots)
         {
             System.out.printf("About to tick: " + activeRobot.toString() + "\n");
-            activeRobot.tick();
+            // if (mode == Mode.CYCLING)
+            activeRobot.cyclingEngine();
+            // else if (mod == Mode.FLOORING)
         }
         robotDispatch();  // dispatch a robot if conditions are met
         // These are returning robots who shouldn't be dispatched in the previous step

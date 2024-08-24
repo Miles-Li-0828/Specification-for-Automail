@@ -130,9 +130,9 @@ public class Robot
     }
 
     /**
-     * Time simulation
+     * robot's cycling engine
      */
-    void tick()
+    void cyclingEngine()
     {
             Building building = Building.getBuilding();
             // Circle mode
