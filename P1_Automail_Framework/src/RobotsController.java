@@ -11,21 +11,21 @@ import static java.lang.String.format;
 public class RobotsController
 {
     // Mode should be controlled by Simulation
-    public enum Mode {CYCLING, FLOORING}
+    private Mode mode;
     private final int numRobots;
 
     Queue<Robot> idleRobots;
     List<Robot> activeRobots;
     List<Robot> deactivatingRobots; // Don't treat a robot as both active and idle by swapping directly
 
-    private MailRoom mailRoom;
+    private final MailRoom mailRoom;
 
     /**
      * Constructor
      *
      * @param numRobots: The number of Robots
      */
-    public RobotsController(int numRobots, int numFloors)
+    public RobotsController(int numRobots, int numFloors, Mode mode)
     {
         this.numRobots = numRobots;
         idleRobots = new LinkedList<>();
@@ -33,6 +33,7 @@ public class RobotsController
             idleRobots.add(new Robot());  // In mailroom, floor/room is not significant
         activeRobots = new ArrayList<>();
         deactivatingRobots = new ArrayList<>();
+        this.mode = mode;
 
         mailRoom = new MailRoom(numFloors);
     }

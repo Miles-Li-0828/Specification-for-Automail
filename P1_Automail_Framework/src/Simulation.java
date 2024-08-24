@@ -39,12 +39,12 @@ public class Simulation
         int robotCapacity = Integer.parseInt(properties.getProperty("robot.capacity"));
         timeout = Integer.parseInt(properties.getProperty("timeout"));
 
-        RobotsController.Mode mode = RobotsController.Mode.valueOf(properties.getProperty("mode"));
+        Mode mode = Mode.valueOf(properties.getProperty("mode"));
 
         Building.initialise(numFloors, numRooms);
         Building building = Building.getBuilding();
 
-        this.robotsController = new RobotsController(numRobots, building.NUMFLOORS);
+        this.robotsController = new RobotsController(numRobots, building.NUMFLOORS, mode);
         for (int i = 0; i < numLetters; i++)
         {
             //Generate letters

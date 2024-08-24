@@ -11,7 +11,6 @@ import static java.lang.String.format;
 public class MailRoom
 {
     // Mode should be controlled by Simulation
-    public enum Mode {CYCLING, FLOORING}
     List<Letter>[] waitingForDelivery; // 这里Letter要改成item
 
     Queue<Robot> idleRobots;
