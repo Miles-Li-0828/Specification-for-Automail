@@ -30,7 +30,12 @@ public class RobotsController
         this.numRobots = numRobots;
         idleRobots = new LinkedList<>();
         for (int i = 0; i < numRobots; i++)
-            idleRobots.add(new Robot());  // In mailroom, floor/room is not significant
+        {
+            if (mode == Mode.CYCLING)
+                idleRobots.add(new CyclingRobot());
+            else if (mode == Mode.FLOORING)
+                idleRobots.add(new CyclingRobot());
+        }
         activeRobots = new ArrayList<>();
         deactivatingRobots = new ArrayList<>();
         this.mode = mode;
@@ -52,9 +57,7 @@ public class RobotsController
         for (Robot activeRobot : activeRobots)
         {
             System.out.printf("About to tick: " + activeRobot.toString() + "\n");
-            // if (mode == Mode.CYCLING)
-            activeRobot.cyclingEngine();
-            // else if (mod == Mode.FLOORING)
+            activeRobot.engine(this);
         }
         robotDispatch();  // dispatch a robot if conditions are met
         // These are returning robots who shouldn't be dispatched in the previous step

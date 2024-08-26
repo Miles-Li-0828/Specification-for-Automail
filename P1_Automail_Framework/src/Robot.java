@@ -7,11 +7,16 @@ import static java.lang.String.format;
 
 /**
  * The Robot class
+ *  Utilised Template pattern,
+ *  define a family of robots, Encapsulate each one, make them interchangeable.
+ *  Increase the code re-usability and reduce the cost of maintaining and operation if
+ *  there are more modes in the future in this software.
+ *
  * <p>
  * @ Author: Miles Li; Skylar Khant; Lam Nguyen
  * @ Since: 22/08/2024
  */
-public class Robot
+public abstract class Robot
 {
     private static int count = 1;
     final private String id;
@@ -40,6 +45,7 @@ public class Robot
     int getRoom() { return room; }
     public String getId() {return id;}
     boolean isEmpty() { return letters.isEmpty(); }
+    public List<Letter> getLetters() {return letters;}
 
     /**
      * Place a robot in the specific room
@@ -57,11 +63,11 @@ public class Robot
 
     /**
      * Move a robot
-     * 肯定要改
      *
      * @param direction: direction
+     * @param robotsController: The robot controller to return a robot
      */
-    private void move(Building.Direction direction)
+    protected void move(Building.Direction direction, RobotsController robotsController)
     {
         Building building = Building.getBuilding();
 
@@ -107,73 +113,15 @@ public class Robot
             if (floor == 0)
             {
                 System.out.printf("About to return: " + this + "\n");
+                robotsController.robotReturn(this);
             }
         }
     }
 
     /**
-     * * Need to Modify *
-     * Transfer the item to another robot
-     *
-     * @param robot: antother robot
+     * robot's engine
      */
-    void transfer(Robot robot)
-    {
-        // Transfers every item assuming receiving robot has capacity
-        ListIterator<Letter> iter = robot.letters.listIterator();
-        while(iter.hasNext())
-        {
-            Letter letter = iter.next();
-            this.add(letter); //Hand it over
-            iter.remove();
-        }
-    }
-
-    /**
-     * robot's cycling engine
-     */
-    void cyclingEngine()
-    {
-            Building building = Building.getBuilding();
-            // Circle mode
-            if (letters.isEmpty())
-            {
-                // Return to MailRoom
-                if (room == building.NUMROOMS + 1)
-                {
-                    // in right end column
-                    move(Building.Direction.DOWN);  //move towards mailroom
-                }
-                else
-                {
-                    move(Building.Direction.RIGHT); // move towards right end column
-                }
-            }
-            else
-            {
-                // Items to deliver
-                if (floor == letters.getFirst().myFloor())
-                {
-                    // On the right floor
-                    if (room == letters.getFirst().myRoom())
-                    {
-                        //then deliver all relevant items to that room
-                        do
-                        {
-                            Simulation.deliver(letters.removeFirst());
-                        } while (!letters.isEmpty() && room == letters.getFirst().myRoom());
-                    }
-                    else
-                    {
-                        move(Building.Direction.RIGHT); // move towards next delivery
-                    }
-                }
-                else
-                {
-                    move(Building.Direction.UP); // move towards floor
-                }
-            }
-    }
+    public abstract void engine(RobotsController robotsController);
 
     /**
      * Get the number of Items that the robot contain
@@ -205,5 +153,4 @@ public class Robot
     {
         Collections.sort(letters);
     }
-
 }

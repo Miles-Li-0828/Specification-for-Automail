@@ -13,10 +13,6 @@ public class MailRoom
     // Mode should be controlled by Simulation
     List<Letter>[] waitingForDelivery; // 这里Letter要改成item
 
-    Queue<Robot> idleRobots;
-    List<Robot> activeRobots;
-    List<Robot> deactivatingRobots; // Don't treat a robot as both active and idle by swapping directly
-
     /**
      * Constructor of Mailroom
      *
@@ -79,18 +75,6 @@ public class MailRoom
         }
         return floor;
     }
-
-    /**
-     * Sort Items based on Items' features
-     */
-    public void sortItems()
-    {
-        for (int i = 0; i < Building.getBuilding().NUMFLOORS; i++)
-        {
-            Collections.sort(waitingForDelivery[i]);
-        }
-    }
-
 
     /**
      * Put new arrived items to responded floor
