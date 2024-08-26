@@ -7,12 +7,10 @@ import static java.lang.String.format;
 
 /**
  * The Robot class
- *  Utilised Template pattern,
- *  define a family of robots, Encapsulate each one, make them interchangeable.
+ *  Utilised Factory pattern,
+ *  define a family of robots, Encapsulate each one, use different kind in different mode
  *  Increase the code re-usability and reduce the cost of maintaining and operation if
  *  there are more modes in the future in this software.
- *
- * <p>
  * @ Author: Miles Li; Skylar Khant; Lam Nguyen
  * @ Since: 22/08/2024
  */
