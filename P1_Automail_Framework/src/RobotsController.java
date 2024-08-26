@@ -36,7 +36,7 @@ public class RobotsController
             if (mode == Mode.CYCLING)
                 idleRobots.add(new CyclingRobot(robotCapacity));
             else if (mode == Mode.FLOORING)
-                idleRobots.add(new CyclingRobot(robotCapacity));
+                idleRobots.add(new FlooringRobot(robotCapacity));
         }
         activeRobots = new ArrayList<>();
         deactivatingRobots = new ArrayList<>();
