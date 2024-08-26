@@ -117,7 +117,7 @@ public abstract class Robot
         if (!building.isOccupied(dfloor, droom))
         {
             // If destination is occupied, do nothing
-            building.updateRoomStatus(floor, room, dfloor, droom, id); // need to modify here
+            building.drawMove(floor, room, dfloor, droom, id); // need to modify here
             floor = dfloor; room = droom;
             if (floor == 0)
             {
@@ -126,6 +126,7 @@ public abstract class Robot
             }
         }
     }
+
 
     /**
      * robot's engine

@@ -7,10 +7,7 @@ public class Letter extends Item
 
     public String toString()
     {
-        return super.toString();
+        return "Floor: " + super.myFloor() + ", Room: " + super.myRoom() + ", Arrival: " + super.myArrival();
     }
 
-    int myFloor() { return super.getFloor(); }
-    int myRoom() { return super.getRoom(); }
-    int myArrival() { return super.getArrival(); }
 }

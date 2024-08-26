@@ -65,7 +65,7 @@ public class MailRoom
         {
             if (!waitingForDelivery[i].isEmpty())
             {
-                int arrival = waitingForDelivery[i].getFirst().getArrival();
+                int arrival = waitingForDelivery[i].getFirst().myArrival();
                 if (earliest > arrival)
                 {
                     floor = i;
@@ -85,7 +85,7 @@ public class MailRoom
     {
         for (Item item : items)
         {
-            waitingForDelivery[item.getFloor()-1].add(item);
+            waitingForDelivery[item.myFloor()-1].add(item);
             System.out.println(item.toString());
         }
     }

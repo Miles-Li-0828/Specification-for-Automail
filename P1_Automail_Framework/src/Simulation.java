@@ -75,7 +75,7 @@ public class Simulation
     {
         System.out.println("Delivered: " + mailItem);
         deliveredCount++;
-        deliveredTotalTime += now() - mailItem.getArrival();
+        deliveredTotalTime += now() - mailItem.myArrival();
     }
 
     /**

@@ -82,6 +82,7 @@ public class RobotsController
         // Can dispatch at most one robot; it needs to move out of the way for the next
         System.out.println("Dispatch at time = " + Simulation.now());
         // Need an idle robot and space to dispatch (could be a traffic jam)
+
         if (!idleRobots.isEmpty() && !Building.getBuilding().isOccupied(0,0))
         {
             int fwei = mailRoom.floorWithEarliestItem();

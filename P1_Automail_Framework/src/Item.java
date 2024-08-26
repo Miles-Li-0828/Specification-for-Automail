@@ -27,9 +27,9 @@ public abstract class Item implements Comparable<Item>
     /**
      * Getters
      */
-    public int getFloor() {return floor;}
-    public int getRoom() {return room;}
-    public int getArrival() {return arrival;}
+    public int myFloor() {return floor;}
+    public int myRoom() {return room;}
+    public int myArrival() {return arrival;}
 
     @Override public int compareTo(Item i)
     {
@@ -37,8 +37,5 @@ public abstract class Item implements Comparable<Item>
         return (floorDiff == 0) ? this.room - i.room : floorDiff;
     }
 
-    public String toString()
-    {
-        return "Floor: " + floor + ", Room: " + room + ", Arrival: " + arrival + ", Weight: " + 0;
-    }
+    public abstract String toString();
 }
