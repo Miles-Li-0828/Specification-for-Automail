@@ -6,7 +6,7 @@ public class CyclingRobot extends Robot
     /**
      * Constructor
      */
-    public CyclingRobot() {super();}
+    public CyclingRobot(int capacity) {super(capacity);}
 
     /**
      * The robot engine for Cycling Robot
@@ -34,16 +34,19 @@ public class CyclingRobot extends Robot
         else
         {
             // Items to deliver
-            if (super.getFloor() == super.getLetters().getFirst().myFloor())
+            if (super.getFloor() == super.getItems().getFirst().getFloor())
             {
                 // On the right floor
-                if (super.getRoom() == super.getLetters().getFirst().myRoom())
+                if (super.getRoom() == super.getItems().getFirst().getRoom())
                 {
                     //then deliver all relevant items to that room
                     do
                     {
-                        Simulation.deliver(super.getLetters().removeFirst());
-                    } while (!super.getLetters().isEmpty() && super.getRoom() == super.getLetters().getFirst().myRoom());
+                        Item deliverItem = super.getItems().removeFirst();
+                        int itemWeight = deliverItem instanceof Parcel p ? p.myWeight() : 0;
+                        super.setCapacity(super.getCapacity() + itemWeight);
+                        Simulation.deliver(deliverItem);
+                    } while (!super.getItems().isEmpty() && super.getRoom() == super.getItems().getFirst().getRoom());
                 }
                 else
                 {

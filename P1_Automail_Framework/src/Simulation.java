@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class Simulation
 {
-    private static final Map<Integer, List<Letter>> waitingToArrive = new HashMap<>();
+    private static final Map<Integer, List<Item>> waitingToArrive = new HashMap<>();
     private static int time = 0;
     public final int endArrival;
     private final RobotsController robotsController;
@@ -44,7 +44,7 @@ public class Simulation
         Building.initialise(numFloors, numRooms);
         Building building = Building.getBuilding();
 
-        this.robotsController = new RobotsController(numRobots, building.NUMFLOORS, mode);
+        this.robotsController = new RobotsController(numRobots, building.NUMFLOORS, mode, robotCapacity);
         for (int i = 0; i < numLetters; i++)
         {
             //Generate letters
@@ -60,6 +60,7 @@ public class Simulation
             int floor = random.nextInt(building.NUMFLOORS)+1;
             int room = random.nextInt(building.NUMROOMS)+1;
             int weight = random.nextInt(maxWeight)+1;
+            addToArrivals(arrivalTime, new Parcel(floor, room, arrivalTime, weight));
             // What am I going to do with all these values?
         }
     }
@@ -70,11 +71,11 @@ public class Simulation
      *
      * @param mailItem: Item
      */
-    public static void deliver(Letter mailItem)
+    public static void deliver(Item mailItem)
     {
         System.out.println("Delivered: " + mailItem);
         deliveredCount++;
-        deliveredTotalTime += now() - mailItem.myArrival();
+        deliveredTotalTime += now() - mailItem.getArrival();
     }
 
     /**
@@ -83,7 +84,7 @@ public class Simulation
      * @param arrivalTime: arrival time
      * @param item: specific item
      */
-    void addToArrivals(int arrivalTime, Letter item)
+    void addToArrivals(int arrivalTime, Item item)
     {
         System.out.println(item.toString());
         if (waitingToArrive.containsKey(arrivalTime))
@@ -92,7 +93,7 @@ public class Simulation
         }
         else
         {
-            LinkedList<Letter> items = new LinkedList<>();
+            LinkedList<Item> items = new LinkedList<>();
             items.add(item);
             waitingToArrive.put(arrivalTime, items);
         }

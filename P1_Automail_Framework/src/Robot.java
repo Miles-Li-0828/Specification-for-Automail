@@ -22,7 +22,8 @@ public abstract class Robot
     final private String id;
     private int floor;
     private int room;
-    final private List<Letter> letters = new ArrayList<>();
+    private int capacity;
+    final private List<Item> items = new ArrayList<>();
 
     /**
      * Constructor
@@ -30,11 +31,17 @@ public abstract class Robot
     public Robot()
     {
         this.id = "R" + count++;
+        this.capacity = 0;
+    }
+    public Robot(int capacity)
+    {
+        this.id = "R" + count++;
+        this.capacity = capacity;
     }
 
     public String toString()
     {
-        return "Id: " + id + " Floor: " + floor + ", Room: " + room + ", #items: " + numItems() + ", Load: " + 0 ;
+        return "Id: " + id + " Floor: " + floor + ", Room: " + room + ", #items: " + numItems() + ", capacity: " + capacity ;
     }
 
 
@@ -43,9 +50,11 @@ public abstract class Robot
      */
     int getFloor() { return floor; }
     int getRoom() { return room; }
-    public String getId() {return id;}
-    boolean isEmpty() { return letters.isEmpty(); }
-    public List<Letter> getLetters() {return letters;}
+    public String getId() { return id; }
+    public int getCapacity() { return capacity; }
+    public void setCapacity(int newCapacity) { capacity = newCapacity; }
+    boolean isEmpty() { return items.isEmpty(); }
+    public List<Item> getItems() {return items;}
 
     /**
      * Place a robot in the specific room
@@ -131,7 +140,7 @@ public abstract class Robot
      */
     public int numItems ()
     {
-        return letters.size();
+        return items.size();
     }
 
     /**
@@ -140,9 +149,15 @@ public abstract class Robot
      *
      * @param item: new item
      */
-    public void add(Letter item)
+    public boolean add(Item item)
     {
-        letters.add(item);
+        int itemWeight = item instanceof Parcel p ? p.myWeight() : 0;
+
+        if (capacity >= itemWeight) {
+            items.add(item);
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -151,6 +166,6 @@ public abstract class Robot
      */
     void sort()
     {
-        Collections.sort(letters);
+        Collections.sort(items);
     }
 }

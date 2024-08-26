@@ -11,7 +11,7 @@ import static java.lang.String.format;
 public class MailRoom
 {
     // Mode should be controlled by Simulation
-    List<Letter>[] waitingForDelivery; // 这里Letter要改成item
+    List<Item>[] waitingForDelivery; // 这里Letter要改成item
 
     /**
      * Constructor of Mailroom
@@ -30,7 +30,7 @@ public class MailRoom
     /**
      * Getter of waiting items
      */
-    public List<Letter>[] getWaitingForDelivery() {return waitingForDelivery;}
+    public List<Item>[] getWaitingForDelivery() {return waitingForDelivery;}
 
     /**
      * * Here need to be improved *
@@ -65,7 +65,7 @@ public class MailRoom
         {
             if (!waitingForDelivery[i].isEmpty())
             {
-                int arrival = waitingForDelivery[i].getFirst().myArrival();
+                int arrival = waitingForDelivery[i].getFirst().getArrival();
                 if (earliest > arrival)
                 {
                     floor = i;
@@ -81,13 +81,12 @@ public class MailRoom
      *
      * @param items: Items
      */
-    public void arrive(List<Letter> items)
+    public void arrive(List<Item> items)
     {
-        for (Letter item : items)
+        for (Item item : items)
         {
-            waitingForDelivery[item.myFloor()-1].add(item);
-            System.out.printf("Item: Time = %d Floor = %d Room = %d Weight = %d\n",
-                    item.myArrival(), item.myFloor(), item.myRoom(), 0);
+            waitingForDelivery[item.getFloor()-1].add(item);
+            System.out.println(item.toString());
         }
     }
 }

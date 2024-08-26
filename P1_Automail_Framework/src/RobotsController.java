@@ -13,6 +13,7 @@ public class RobotsController
     // Mode should be controlled by Simulation
     private Mode mode;
     private final int numRobots;
+    private int robotCapacity;
 
     Queue<Robot> idleRobots;
     List<Robot> activeRobots;
@@ -25,16 +26,17 @@ public class RobotsController
      *
      * @param numRobots: The number of Robots
      */
-    public RobotsController(int numRobots, int numFloors, Mode mode)
+    public RobotsController(int numRobots, int numFloors, Mode mode, int robotCapacity)
     {
         this.numRobots = numRobots;
+        this.robotCapacity = robotCapacity;
         idleRobots = new LinkedList<>();
         for (int i = 0; i < numRobots; i++)
         {
             if (mode == Mode.CYCLING)
-                idleRobots.add(new CyclingRobot());
+                idleRobots.add(new CyclingRobot(robotCapacity));
             else if (mode == Mode.FLOORING)
-                idleRobots.add(new CyclingRobot());
+                idleRobots.add(new CyclingRobot(robotCapacity));
         }
         activeRobots = new ArrayList<>();
         deactivatingRobots = new ArrayList<>();
@@ -122,13 +124,16 @@ public class RobotsController
      */
     void loadRobot(int floor, Robot robot)
     {
-        ListIterator<Letter> iter = mailRoom.getWaitingForDelivery()[floor].listIterator();
+        ListIterator<Item> iter = mailRoom.getWaitingForDelivery()[floor].listIterator();
         while (iter.hasNext())
         {
             // In timestamp order
-            Letter letter = iter.next();
-            robot.add(letter); //Hand it over
-            iter.remove();
+            Item item = iter.next();
+            if (robot.add(item))  //Hand it over
+            {
+                iter.remove();
+            }
+
         }
     }
 }

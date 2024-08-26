@@ -5,7 +5,7 @@ public class FlooringRobot extends Robot
     /**
      * Constructor
      */
-    public FlooringRobot() {super();}
+    public FlooringRobot(int capacity) {super(capacity);}
 
     /**
      * Robot engine for Flooring Mode
@@ -27,11 +27,11 @@ public class FlooringRobot extends Robot
     void transfer(Robot robot)
     {
         // Transfers every item assuming receiving robot has capacity
-        ListIterator<Letter> iter = robot.getLetters().listIterator();
+        ListIterator<Item> iter = robot.getItems().listIterator();
         while(iter.hasNext())
         {
-            Letter letter = iter.next();
-            this.add(letter); //Hand it over
+            Item item = iter.next();
+            this.add(item); //Hand it over
             iter.remove();
         }
     }
