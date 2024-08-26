@@ -21,7 +21,7 @@ public abstract class Robot
     private int floor;
     private int room;
     private int capacity;
-    final private List<Item> items = new ArrayList<>();
+    private List<Item> items = new ArrayList<>();
 
     /**
      * Constructor
@@ -51,6 +51,8 @@ public abstract class Robot
     public String getId() { return id; }
     public int getCapacity() { return capacity; }
     public void setCapacity(int newCapacity) { capacity = newCapacity; }
+    public void setItems(List<Item> items) {this.items = items;}
+
     boolean isEmpty() { return items.isEmpty(); }
     public List<Item> getItems() {return items;}
 
@@ -74,7 +76,7 @@ public abstract class Robot
      * @param direction: direction
      * @param robotsController: The robot controller to return a robot
      */
-    protected void move(Building.Direction direction, RobotsController robotsController)
+    protected void move(Direction direction, RobotsController robotsController)
     {
         Building building = Building.getBuilding();
 

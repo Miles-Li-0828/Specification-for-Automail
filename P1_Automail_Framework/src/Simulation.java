@@ -44,6 +44,7 @@ public class Simulation
         Building.initialise(numFloors, numRooms);
         Building building = Building.getBuilding();
 
+        // Factory method
         switch (mode)
         {
             case Mode.CYCLING:

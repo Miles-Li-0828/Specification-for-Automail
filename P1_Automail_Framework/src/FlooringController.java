@@ -1,5 +1,4 @@
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * The controller for Flooring mode
@@ -8,12 +7,15 @@ import java.util.Queue;
  */
 public class FlooringController extends RobotsController
 {
+    private List<Robot> columnRobots = new ArrayList<>();
+    private List<Robot> floorRobot = new ArrayList<>();
+
     /**
      * Constructor
      *
-     * @param numRobots     : The number of Robots
-     * @param numFloors
-     * @param robotCapacity
+     * @param numRobots: The number of Robots
+     * @param numFloors: The number of floors
+     * @param robotCapacity: The max capacity of robots
      */
     public FlooringController(int numRobots, int numFloors, int robotCapacity)
     {
@@ -21,7 +23,7 @@ public class FlooringController extends RobotsController
         Queue<Robot> idleRobots = new LinkedList<>();
         for (int i = 0; i < numRobots; i++)
         {
-            idleRobots.add(new FlooringRobot(robotCapacity));
+            idleRobots.add(new FloorRobot(robotCapacity));
         }
         super.setIdleRobots(idleRobots);
     }

@@ -1,28 +1,22 @@
 import java.util.ListIterator;
 
-public class FlooringRobot extends Robot
+public class ColumnRobot extends Robot
 {
     /**
      * Constructor
      */
-    public FlooringRobot(int capacity) {super(capacity);}
+    public ColumnRobot(int capacity) {super(capacity);}
 
-    /**
-     * Robot engine for Flooring Mode
-     *
-     * @param robotsController
-     */
     @Override
     public void engine(RobotsController robotsController)
     {
-        return;
+
     }
 
     /**
-     * * Need to Modify *
      * Transfer the item to another robot
      *
-     * @param robot: antother robot
+     * @param robot: another robot
      */
     void transfer(Robot robot)
     {
