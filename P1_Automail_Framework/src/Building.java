@@ -33,6 +33,11 @@ public class Building
     }
 
     /**
+     * getters
+     */
+    public boolean[][] getOccupied() {return occupied;}
+
+    /**
      * Initialise the Building
      *
      * @param numFloors: The Number of floors
@@ -105,48 +110,17 @@ public class Building
     }
 
     /**
-     * Move a robot to a specific direction
-     * ** This method should not belong to Building: high coupling; low cohesion;
+     * Update the room status in the building based on the positions of Robots
      *
-     * @param floor: the floor number
-     * @param room: the room number
-     * @param direction: direction of moving
+     * @param floor: the floor number before robot move
+     * @param room: the room number after robot move
+     * @param dfloor: the floor number after robot move
+     * @param droom: teh room number after robot move
      * @param id: Robot id
      */
-    void move(int floor, int room, Direction direction, String id)
+    void updateRoomStatus(int floor, int room, int dfloor, int droom, String id)
     {
         assert occupied[floor][room] : format("move from unoccupied position floor=%d; room=%d", floor, room);
-        int dfloor, droom;
-        switch (direction)
-        {
-            case UP ->
-            {
-                assert floor < NUMFLOORS + 1 : format("attempt to move above building floor=%d; room=%d", floor, room);
-                assert room == 0 || room == NUMROOMS + 1 : format("attempt to move up through ceiling floor=%d; room=%d", floor, room);
-                dfloor = floor + 1;
-                droom = room;
-            }
-            case DOWN ->
-            {
-                assert floor > 0 : format("attempt to move below mailroom floor=%d; room=%d", floor, room);
-                assert room == 0 || room == NUMROOMS + 1 : format("attempt to move down through floor floor=%d; room=%d", floor, room);
-                dfloor = floor - 1;
-                droom = room;
-            }
-            case LEFT ->
-            {
-                assert room > 1 : format("attempt to move left outside building floor=%d; room=%d", floor, room);
-                dfloor = floor;
-                droom = room - 1;
-            }
-            case RIGHT ->
-            {
-                assert room < NUMROOMS + 1 : format("attempt to move right outside building floor=%d; room=%d", floor, room);
-                dfloor = floor;
-                droom = room + 1;
-            }
-            default -> throw new IllegalArgumentException("Unexpected value: " + direction);
-        }
         assert !occupied[dfloor][droom] : format("attempt move to occupied position floor=%d; room=%d", dfloor, droom);
         occupied[floor][room] = false;
         bg.update(floor, room, ""); // Display

@@ -14,7 +14,7 @@ public class Simulation
     private static final Map<Integer, List<Letter>> waitingToArrive = new HashMap<>();
     private static int time = 0;
     public final int endArrival;
-    final public MailRoom mailroom;
+    private final RobotsController robotsController;
     private static int timeout;
 
     private static int deliveredCount = 0;
@@ -38,11 +38,13 @@ public class Simulation
         int numRobots = Integer.parseInt(properties.getProperty("robot.number"));
         int robotCapacity = Integer.parseInt(properties.getProperty("robot.capacity"));
         timeout = Integer.parseInt(properties.getProperty("timeout"));
-        MailRoom.Mode mode = MailRoom.Mode.valueOf(properties.getProperty("mode"));
+
+        Mode mode = Mode.valueOf(properties.getProperty("mode"));
 
         Building.initialise(numFloors, numRooms);
         Building building = Building.getBuilding();
-        mailroom = new MailRoom(building.NUMFLOORS, numRobots);
+
+        this.robotsController = new RobotsController(numRobots, building.NUMFLOORS, mode);
         for (int i = 0; i < numLetters; i++)
         {
             //Generate letters
@@ -110,9 +112,9 @@ public class Simulation
     {
         // External events
         if (waitingToArrive.containsKey(time))
-            mailroom.arrive(waitingToArrive.get(time));
+            robotsController.getMailRoom().arrive(waitingToArrive.get(time));
         // Internal events
-        mailroom.tick();
+        robotsController.tick();
     }
 
     /**
@@ -120,7 +122,7 @@ public class Simulation
      */
     void run()
     {
-        while (time++ <= endArrival || mailroom.hasItemsForDelivery())
+        while (time++ <= endArrival || robotsController.getMailRoom().hasItemsForDelivery())
         {
             step();
             try
