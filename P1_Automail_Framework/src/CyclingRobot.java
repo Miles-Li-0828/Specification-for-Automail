@@ -34,10 +34,10 @@ public class CyclingRobot extends Robot
         else
         {
             // Items to deliver
-            if (super.getFloor() == super.getItems().getFirst().getFloor())
+            if (super.getFloor() == super.getItems().getFirst().myFloor())
             {
                 // On the right floor
-                if (super.getRoom() == super.getItems().getFirst().getRoom())
+                if (super.getRoom() == super.getItems().getFirst().myRoom())
                 {
                     //then deliver all relevant items to that room
                     do
@@ -46,16 +46,16 @@ public class CyclingRobot extends Robot
                         int itemWeight = deliverItem instanceof Parcel p ? p.myWeight() : 0;
                         super.setCapacity(super.getCapacity() + itemWeight);
                         Simulation.deliver(deliverItem);
-                    } while (!super.getItems().isEmpty() && super.getRoom() == super.getItems().getFirst().getRoom());
+                    } while (!super.getItems().isEmpty() && super.getRoom() == super.getItems().getFirst().myRoom());
                 }
                 else
                 {
-                    move(Building.Direction.RIGHT, robotsController); // move towards next delivery
+                    super.move(Building.Direction.RIGHT, robotsController); // move towards next delivery
                 }
             }
             else
             {
-                move(Building.Direction.UP, robotsController); // move towards floor
+                super.move(Building.Direction.UP, robotsController); // move towards floor
             }
         }
     }

@@ -10,11 +10,8 @@ public class Parcel extends Item
 
     public String toString()
     {
-        return super.toString() + "Weight: " + weight;
+        return "Floor: " + super.myFloor() + ", Room: " + super.myRoom() + ", Arrival: " + super.myArrival() + ", Weight: " + weight;
     }
 
-    int myFloor() { return super.getFloor(); }
-    int myRoom() { return super.getRoom(); }
-    int myArrival() { return super.getArrival(); }
     int myWeight() {return weight;}
 }

@@ -118,7 +118,7 @@ public class Building
      * @param droom: teh room number after robot move
      * @param id: Robot id
      */
-    void updateRoomStatus(int floor, int room, int dfloor, int droom, String id)
+    void drawMove(int floor, int room, int dfloor, int droom, String id)
     {
         assert occupied[floor][room] : format("move from unoccupied position floor=%d; room=%d", floor, room);
         assert !occupied[dfloor][droom] : format("attempt move to occupied position floor=%d; room=%d", dfloor, droom);
