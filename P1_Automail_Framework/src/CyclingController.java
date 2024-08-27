@@ -68,10 +68,11 @@ public class CyclingController extends RobotsController
         {
             int fwei = super.getMailRoom().floorWithEarliestItem();
             if (fwei >= 0)
-            {  // Need an item or items to deliver, starting with earliest
+            {
+                // Need an item or items to deliver, starting with earliest
                 Robot robot = super.getIdleRobots().remove();
                 loadRobot(fwei, robot);
-                // Room order for left to right delivery
+                // Room order for left-to-right delivery
                 robot.sort();
                 List<Robot> activeRobots = super.getActiveRobots();
                 activeRobots.add(robot);

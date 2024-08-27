@@ -24,7 +24,7 @@ public class CyclingRobot extends Robot
             if (super.getRoom() == building.NUMROOMS + 1)
             {
                 // in right end column
-                super.move(Direction.DOWN, robotsController);  //move towards mailroom
+                super.move(Direction.DOWN, robotsController);  //move towards the mailRoom
             }
             else
             {

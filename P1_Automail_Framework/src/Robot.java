@@ -21,20 +21,18 @@ public abstract class Robot
     private int floor;
     private int room;
     private int capacity;
+    private final int MAX_CAPACITY;
     private List<Item> items = new ArrayList<>();
 
     /**
      * Constructor
      */
-    public Robot()
-    {
-        this.id = "R" + count++;
-        this.capacity = 0;
-    }
+
     public Robot(int capacity)
     {
         this.id = "R" + count++;
         this.capacity = capacity;
+        MAX_CAPACITY = capacity;
     }
 
     public String toString()
@@ -52,6 +50,7 @@ public abstract class Robot
     public int getCapacity() { return capacity; }
     public void setCapacity(int newCapacity) { capacity = newCapacity; }
     public void setItems(List<Item> items) {this.items = items;}
+    public int getMAX_CAPACITY() {return MAX_CAPACITY;}
 
     boolean isEmpty() { return items.isEmpty(); }
     public List<Item> getItems() {return items;}

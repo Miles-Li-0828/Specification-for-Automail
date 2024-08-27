@@ -23,11 +23,23 @@ public class FlooringController extends RobotsController
         Queue<Robot> idleRobots = new LinkedList<>();
         for (int i = 0; i < numRobots; i++)
         {
-            idleRobots.add(new FloorRobot(robotCapacity));
+            if (i < 2)
+            {
+                idleRobots.add(new ColumnRobot(robotCapacity));
+                columnRobots.add(new ColumnRobot(robotCapacity));
+            }
+            else
+            {
+                floorRobot.add(new FloorRobot(robotCapacity));
+            }
         }
         super.setIdleRobots(idleRobots);
     }
 
+    /**
+     * Getters
+     */
+    public List<Robot> getColumnRobots() {return columnRobots;}
 
     @Override
     public void tick()

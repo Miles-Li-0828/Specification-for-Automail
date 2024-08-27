@@ -114,7 +114,7 @@ public class Building
      * @param floor: the floor number before robot move
      * @param room: the room number after robot move
      * @param dfloor: the floor number after robot move
-     * @param droom: teh room number after robot move
+     * @param droom: the room number after robot move
      * @param id: Robot id
      */
     void drawMove(int floor, int room, int dfloor, int droom, String id)

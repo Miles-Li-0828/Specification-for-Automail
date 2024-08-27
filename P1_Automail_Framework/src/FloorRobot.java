@@ -7,6 +7,7 @@ import java.util.*;
 public class FloorRobot extends Robot
 {
     private boolean toRight = false;
+    private boolean toLeft = false;
 
     /**
      * Constructor
@@ -22,34 +23,57 @@ public class FloorRobot extends Robot
     public void engine(RobotsController robotsController)
     {
         // If still has items, deliver them all
-        ListIterator<Item> iter = super.getItems().listIterator();
-        while (iter.hasNext())
+        if (!super.getItems().isEmpty())
         {
-            Item item = iter.next();
-            iter.remove();
+            Item item = super.getItems().removeFirst();
             if (super.getRoom() == item.myRoom())
             {
                 Simulation.deliver(item);
                 List<Item> remainingItems = super.getItems();
                 remainingItems.remove(item);
                 super.setItems(remainingItems);
+                if (item instanceof Parcel parcel)
+                {
+                    this.setCapacity(this.getCapacity() + parcel.myWeight());
+                }
             }
             else if (super.getRoom() < item.myRoom())
             {
                 super.move(Direction.RIGHT, robotsController);
-                toRight = true;
             }
             else
             {
                 super.move(Direction.LEFT, robotsController);
-                toRight = false;
             }
         }
-
-        // If robot has no items and
-        // If robot is head to a column robot, move to it
-        // If robot is right next to a colum robot, wait for transfer
-        // No column robots ahead and no items, do nothing
+        // If robot has no items
+        else
+        {
+            // If there's a Column Robot next to this robot, transfer items
+            if (super.getRoom() == 1 && detectLeft())
+            {
+                toRight = toLeft = false;
+            }
+            else if (super.getRoom() == Building.getBuilding().NUMROOMS - 2 && detectRight())
+            {
+                toRight = toLeft = false;
+            }
+            else
+            {
+                if (detectRight() && !toLeft)
+                {
+                    super.move(Direction.RIGHT, robotsController);
+                    toRight = true;
+                    toLeft = false;
+                }
+                else if (detectLeft() && !toRight)
+                {
+                    super.move(Direction.LEFT, robotsController);
+                    toLeft = true;
+                    toRight = false;
+                }
+            }
+        }
     }
 
     /**
@@ -57,7 +81,8 @@ public class FloorRobot extends Robot
      */
     private boolean detectRight()
     {
-        return true;
+        boolean[][] occupied = Building.getBuilding().getOccupied();
+        return occupied[super.getFloor()][Building.getBuilding().NUMROOMS - 1];
     }
 
     /**
@@ -65,6 +90,7 @@ public class FloorRobot extends Robot
      */
     private boolean detectLeft()
     {
-        return true;
+        boolean[][] occupied = Building.getBuilding().getOccupied();
+        return occupied[super.getFloor()][0];
     }
 }
