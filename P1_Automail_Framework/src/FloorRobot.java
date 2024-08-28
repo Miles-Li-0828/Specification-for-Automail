@@ -6,15 +6,24 @@ import java.util.*;
  */
 public class FloorRobot extends Robot
 {
-    private boolean toRight = false;
-    private boolean toLeft = false;
+    private int targetRoom;
     private boolean waiting = false;
+    private boolean movingToCR = false;
+    private Queue<ColumnRobot> signals = new LinkedList<>();
 
     /**
      * Constructor
      */
     public FloorRobot(int capacity) {super(capacity);}
+
+    /**
+     * getters and setters
+     */
     public boolean isWaiting() {return waiting;}
+    public Queue<ColumnRobot> getSignals() {return signals;}
+    public void setSignals(Queue<ColumnRobot> signals) {this.signals = signals;}
+    public boolean isMovingToCR() {return movingToCR;}
+    public void setMovingToCR(boolean movingToCR) {this.movingToCR = movingToCR;}
 
     /**
      * Robot engine for Flooring Mode
@@ -24,12 +33,25 @@ public class FloorRobot extends Robot
     @Override
     public void engine(RobotsController robotsController)
     {
+        if (movingToCR)
+        {
+            if (super.getRoom() < targetRoom)
+            {
+                super.move(Direction.RIGHT, robotsController);
+            }
+            else
+            {
+                super.move(Direction.LEFT, robotsController);
+            }
+        }
+
         // If still has items, deliver them all
         if (!super.getItems().isEmpty())
         {
             waiting = false;
             Item item = super.getItems().removeFirst();
-            if (super.getRoom() == item.myRoom())
+            targetRoom = item.myRoom();
+            if (super.getRoom() == targetRoom)
             {
                 Simulation.deliver(item);
                 if (item instanceof Parcel parcel)
@@ -37,7 +59,7 @@ public class FloorRobot extends Robot
                     this.setCapacity(this.getCapacity() + parcel.myWeight());
                 }
             }
-            else if (super.getRoom() < item.myRoom())
+            else if (super.getRoom() < targetRoom)
             {
                 super.move(Direction.RIGHT, robotsController);
             }
@@ -49,26 +71,16 @@ public class FloorRobot extends Robot
         // If robot has no items
         else
         {
-
-
+            waiting = true;
+            // if a robot sends a signal to me, move to it
+            if (!signals.isEmpty())
+            {
+                ColumnRobot cr = signals.remove();
+                waiting = false;
+                movingToCR = true;
+                targetRoom = cr.getRoom() == 0 ? 1 : Building.getBuilding().NUMROOMS;
+            }
+            // else, do nothing
         }
-    }
-
-    /**
-     * Detect if there's a column robot waiting on the right side of this robot
-     */
-    private boolean detectRight()
-    {
-        boolean[][] occupied = Building.getBuilding().getOccupied();
-        return occupied[super.getFloor()][Building.getBuilding().NUMROOMS + 1];
-    }
-
-    /**
-     * Detect if there's a column robot waiting on the left side of this robot
-     */
-    private boolean detectLeft()
-    {
-        boolean[][] occupied = Building.getBuilding().getOccupied();
-        return occupied[super.getFloor()][0];
     }
 }
