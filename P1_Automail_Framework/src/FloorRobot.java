@@ -51,7 +51,7 @@ public class FloorRobot extends Robot
             {
                 toRight = toLeft = false;
             }
-            else if (super.getRoom() == Building.getBuilding().NUMROOMS - 2 && detectRight())
+            else if (super.getRoom() == Building.getBuilding().NUMROOMS && detectRight())
             {
                 toRight = toLeft = false;
             }
@@ -79,7 +79,7 @@ public class FloorRobot extends Robot
     private boolean detectRight()
     {
         boolean[][] occupied = Building.getBuilding().getOccupied();
-        return occupied[super.getFloor()][Building.getBuilding().NUMROOMS - 1];
+        return occupied[super.getFloor()][Building.getBuilding().NUMROOMS + 1];
     }
 
     /**

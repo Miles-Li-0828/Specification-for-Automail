@@ -42,6 +42,7 @@ public class FlooringController extends RobotsController
      * Getters
      */
     public List<Robot> getColumnRobots() {return columnRobots;}
+    public List<Robot> getFloorRobots() {return floorRobots;}
 
     @Override
     public void tick()
@@ -102,7 +103,7 @@ public class FlooringController extends RobotsController
             }
             else if (robot.getId().equals("R2"))
             {
-                robot.place(0, Building.getBuilding().NUMROOMS - 1);
+                robot.place(0, Building.getBuilding().NUMROOMS + 1);
             }
         }
     }
@@ -112,7 +113,7 @@ public class FlooringController extends RobotsController
      */
     public void initialiseFloorRobots()
     {
-        int floor = 0;
+        int floor = 1;
         for (Robot robot: floorRobots)
         {
             robot.place(floor++, 1);

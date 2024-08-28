@@ -28,12 +28,12 @@ public class ColumnRobot extends Robot
                 if (super.getRoom() == 0 &&
                         Building.getBuilding().isOccupied(super.getFloor(), super.getRoom() + 1))
                 {
-                    transfer(flooringController.getColumnRobots().get(super.getFloor()));
+                    transfer(flooringController.getFloorRobots().get(super.getFloor() - 1));
                 }
                 else if (super.getRoom() == Building.getBuilding().NUMROOMS - 1 &&
                             Building.getBuilding().isOccupied(super.getFloor(), super.getRoom() - 1))
                 {
-                    transfer(flooringController.getColumnRobots().get(super.getFloor()));
+                    transfer(flooringController.getFloorRobots().get(super.getFloor()));
                 }
             }
         }
