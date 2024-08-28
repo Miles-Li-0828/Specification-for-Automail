@@ -7,12 +7,10 @@ import static java.lang.String.format;
 
 /**
  * The Robot class
- *  Utilised Template pattern,
- *  define a family of robots, Encapsulate each one, make them interchangeable.
+ *  Utilised Factory pattern,
+ *  define a family of robots, Encapsulate each one, use different kind in different mode
  *  Increase the code re-usability and reduce the cost of maintaining and operation if
  *  there are more modes in the future in this software.
- *
- * <p>
  * @ Author: Miles Li; Skylar Khant; Lam Nguyen
  * @ Since: 22/08/2024
  */
@@ -23,20 +21,17 @@ public abstract class Robot
     private int floor;
     private int room;
     private int capacity;
-    final private List<Item> items = new ArrayList<>();
+    private final int MAX_CAPACITY;
+    private List<Item> items = new ArrayList<>();
 
     /**
      * Constructor
      */
-    public Robot()
-    {
-        this.id = "R" + count++;
-        this.capacity = 0;
-    }
     public Robot(int capacity)
     {
         this.id = "R" + count++;
         this.capacity = capacity;
+        MAX_CAPACITY = capacity;
     }
 
     public String toString()
@@ -48,12 +43,15 @@ public abstract class Robot
     /**
      * Getters
      */
-    int getFloor() { return floor; }
-    int getRoom() { return room; }
+    public int getFloor() { return floor; }
+    public int getRoom() { return room; }
     public String getId() { return id; }
     public int getCapacity() { return capacity; }
     public void setCapacity(int newCapacity) { capacity = newCapacity; }
-    boolean isEmpty() { return items.isEmpty(); }
+    public void setItems(List<Item> items) {this.items = items;}
+    public int getMAX_CAPACITY() {return MAX_CAPACITY;}
+
+    public boolean isEmpty() { return items.isEmpty(); }
     public List<Item> getItems() {return items;}
 
     /**
@@ -76,7 +74,7 @@ public abstract class Robot
      * @param direction: direction
      * @param robotsController: The robot controller to return a robot
      */
-    protected void move(Building.Direction direction, RobotsController robotsController)
+    protected void move(Direction direction, RobotsController robotsController)
     {
         Building building = Building.getBuilding();
 
@@ -116,7 +114,7 @@ public abstract class Robot
         }
         if (!building.isOccupied(dfloor, droom))
         {
-            // If destination is occupied, do nothing
+            // If the destination is occupied, do nothing
             building.drawMove(floor, room, dfloor, droom, id); // need to modify here
             floor = dfloor; room = droom;
             if (floor == 0)
@@ -154,8 +152,10 @@ public abstract class Robot
     {
         int itemWeight = item instanceof Parcel p ? p.myWeight() : 0;
 
-        if (capacity >= itemWeight) {
+        if (capacity >= itemWeight)
+        {
             items.add(item);
+            capacity -= itemWeight;
             return true;
         }
         return false;

@@ -24,11 +24,11 @@ public class CyclingRobot extends Robot
             if (super.getRoom() == building.NUMROOMS + 1)
             {
                 // in right end column
-                super.move(Building.Direction.DOWN, robotsController);  //move towards mailroom
+                super.move(Direction.DOWN, robotsController);  //move towards the mailRoom
             }
             else
             {
-                super.move(Building.Direction.RIGHT, robotsController); // move towards right end column
+                super.move(Direction.RIGHT, robotsController); // move towards right end column
             }
         }
         else
@@ -50,12 +50,12 @@ public class CyclingRobot extends Robot
                 }
                 else
                 {
-                    super.move(Building.Direction.RIGHT, robotsController); // move towards next delivery
+                    super.move(Direction.RIGHT, robotsController); // move towards next delivery
                 }
             }
             else
             {
-                super.move(Building.Direction.UP, robotsController); // move towards floor
+                super.move(Direction.UP, robotsController); // move towards floor
             }
         }
     }

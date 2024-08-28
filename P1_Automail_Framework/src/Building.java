@@ -1,7 +1,7 @@
 import static java.lang.String.format;
 
 /**
- * Building class to present building in auto-mail system
+ * Building class to present building in an auto-mail system
  *
  * @Author: Miles Li; Skylar Khant; Lam Nguyen
  * @Since: 21/08/2024
@@ -13,7 +13,6 @@ public class Building
     final public int NUMFLOORS;
     final public int NUMROOMS;
     private boolean[][] occupied;
-    public enum Direction {LEFT, RIGHT, UP, DOWN}
 
     private static BuildingGrid bg;
 
@@ -115,7 +114,7 @@ public class Building
      * @param floor: the floor number before robot move
      * @param room: the room number after robot move
      * @param dfloor: the floor number after robot move
-     * @param droom: teh room number after robot move
+     * @param droom: the room number after robot move
      * @param id: Robot id
      */
     void drawMove(int floor, int room, int dfloor, int droom, String id)

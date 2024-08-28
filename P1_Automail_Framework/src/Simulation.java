@@ -14,7 +14,7 @@ public class Simulation
     private static final Map<Integer, List<Item>> waitingToArrive = new HashMap<>();
     private static int time = 0;
     public final int endArrival;
-    private final RobotsController robotsController;
+    private RobotsController robotsController;
     private static int timeout;
 
     private static int deliveredCount = 0;
@@ -44,7 +44,17 @@ public class Simulation
         Building.initialise(numFloors, numRooms);
         Building building = Building.getBuilding();
 
-        this.robotsController = new RobotsController(numRobots, building.NUMFLOORS, mode, robotCapacity);
+        // Factory method
+        switch (mode)
+        {
+            case Mode.CYCLING:
+                this.robotsController = new CyclingController(numRobots, building.NUMFLOORS, robotCapacity);
+                break;
+            case Mode.FLOORING:
+                this.robotsController = new FlooringController(numRobots, building.NUMFLOORS, robotCapacity);
+                break;
+        }
+
         for (int i = 0; i < numLetters; i++)
         {
             //Generate letters
