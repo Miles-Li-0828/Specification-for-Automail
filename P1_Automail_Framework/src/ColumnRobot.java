@@ -18,23 +18,18 @@ public class ColumnRobot extends Robot
         if (!this.getItems().isEmpty())
         {
             int targetFloor = this.getItems().getFirst().myFloor();
-            if (super.getFloor() != targetFloor)
+            if (super.getFloor() < targetFloor)
             {
                 super.move(Direction.UP, robotsController);
             }
+            else if (super.getFloor() > targetFloor)
+            {
+                super.move(Direction.DOWN, robotsController);
+            }
             else
             {
-                // If the Floor Robot is next to this robot, transfer items. Otherwise, wait
-                if (super.getRoom() == 0 &&
-                        Building.getBuilding().isOccupied(super.getFloor(), super.getRoom() + 1))
-                {
-                    transfer(flooringController.getFloorRobots().get(super.getFloor() - 1));
-                }
-                else if (super.getRoom() == Building.getBuilding().NUMROOMS - 1 &&
-                            Building.getBuilding().isOccupied(super.getFloor(), super.getRoom() - 1))
-                {
-                    transfer(flooringController.getFloorRobots().get(super.getFloor()));
-                }
+
+
             }
         }
         else
@@ -51,9 +46,18 @@ public class ColumnRobot extends Robot
     void transfer(Robot robot)
     {
         // Transfers every item assuming receiving robot has capacity
-        robot.setItems(this.getItems());
-        robot.setCapacity(this.getCapacity());
-        this.setCapacity(this.getMAX_CAPACITY());
-        this.setItems(new ArrayList<>());
+        ListIterator<Item> iter = super.getItems().listIterator();
+        while(iter.hasNext())
+        {
+            Item item = iter.next();
+            if (robot.add(item)) //Hand it over
+            {
+                if (item instanceof Parcel parcel)
+                    super.setCapacity(super.getCapacity() + parcel.myWeight());
+                iter.remove();
+            }
+            else
+                break;
+        }
     }
 }

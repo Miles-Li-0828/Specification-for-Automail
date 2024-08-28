@@ -8,11 +8,13 @@ public class FloorRobot extends Robot
 {
     private boolean toRight = false;
     private boolean toLeft = false;
+    private boolean waiting = false;
 
     /**
      * Constructor
      */
     public FloorRobot(int capacity) {super(capacity);}
+    public boolean isWaiting() {return waiting;}
 
     /**
      * Robot engine for Flooring Mode
@@ -25,6 +27,7 @@ public class FloorRobot extends Robot
         // If still has items, deliver them all
         if (!super.getItems().isEmpty())
         {
+            waiting = false;
             Item item = super.getItems().removeFirst();
             if (super.getRoom() == item.myRoom())
             {
@@ -46,30 +49,8 @@ public class FloorRobot extends Robot
         // If robot has no items
         else
         {
-            // If there's a Column Robot next to this robot, transfer items
-            if (super.getRoom() == 1 && detectLeft())
-            {
-                toRight = toLeft = false;
-            }
-            else if (super.getRoom() == Building.getBuilding().NUMROOMS && detectRight())
-            {
-                toRight = toLeft = false;
-            }
-            else
-            {
-                if (detectRight() && !toLeft)
-                {
-                    super.move(Direction.RIGHT, robotsController);
-                    toRight = true;
-                    toLeft = false;
-                }
-                else if (detectLeft() && !toRight)
-                {
-                    super.move(Direction.LEFT, robotsController);
-                    toLeft = true;
-                    toRight = false;
-                }
-            }
+
+
         }
     }
 

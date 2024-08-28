@@ -43,15 +43,15 @@ public abstract class Robot
     /**
      * Getters
      */
-    int getFloor() { return floor; }
-    int getRoom() { return room; }
+    public int getFloor() { return floor; }
+    public int getRoom() { return room; }
     public String getId() { return id; }
     public int getCapacity() { return capacity; }
     public void setCapacity(int newCapacity) { capacity = newCapacity; }
     public void setItems(List<Item> items) {this.items = items;}
     public int getMAX_CAPACITY() {return MAX_CAPACITY;}
 
-    boolean isEmpty() { return items.isEmpty(); }
+    public boolean isEmpty() { return items.isEmpty(); }
     public List<Item> getItems() {return items;}
 
     /**
