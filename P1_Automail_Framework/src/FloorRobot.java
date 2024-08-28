@@ -35,6 +35,7 @@ public class FloorRobot extends Robot
     {
         if (movingToCR)
         {
+            waiting = false;
             if (super.getRoom() < targetRoom)
             {
                 super.move(Direction.RIGHT, robotsController);
@@ -44,16 +45,17 @@ public class FloorRobot extends Robot
                 super.move(Direction.LEFT, robotsController);
             }
         }
-
         // If still has items, deliver them all
-        if (!super.getItems().isEmpty())
+        else if (!super.getItems().isEmpty())
         {
+            movingToCR = false;
             waiting = false;
             Item item = super.getItems().removeFirst();
             targetRoom = item.myRoom();
             if (super.getRoom() == targetRoom)
             {
                 Simulation.deliver(item);
+                super.getItems().remove(item);
                 if (item instanceof Parcel parcel)
                 {
                     this.setCapacity(this.getCapacity() + parcel.myWeight());
@@ -73,7 +75,7 @@ public class FloorRobot extends Robot
         {
             waiting = true;
             // if a robot sends a signal to me, move to it
-            if (!signals.isEmpty())
+            if (!signals.isEmpty() && !movingToCR)
             {
                 ColumnRobot cr = signals.remove();
                 waiting = false;

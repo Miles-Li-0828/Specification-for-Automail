@@ -1,7 +1,7 @@
 import static java.lang.String.format;
 
 /**
- * Building class to present building in auto-mail system
+ * Building class to present building in an auto-mail system
  *
  * @Author: Miles Li; Skylar Khant; Lam Nguyen
  * @Since: 21/08/2024
