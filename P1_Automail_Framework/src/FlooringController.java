@@ -26,8 +26,9 @@ public class FlooringController extends RobotsController
         {
             if (i < 2)
             {
-                idleRobots.add(new ColumnRobot(robotCapacity));
-                columnRobots.add(new ColumnRobot(robotCapacity));
+                ColumnRobot columnRobot = new ColumnRobot(robotCapacity);
+                idleRobots.add(columnRobot);
+                columnRobots.add(columnRobot);
             }
             else
             {
