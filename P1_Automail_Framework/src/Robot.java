@@ -27,7 +27,6 @@ public abstract class Robot
     /**
      * Constructor
      */
-
     public Robot(int capacity)
     {
         this.id = "R" + count++;
@@ -153,8 +152,10 @@ public abstract class Robot
     {
         int itemWeight = item instanceof Parcel p ? p.myWeight() : 0;
 
-        if (capacity >= itemWeight) {
+        if (capacity >= itemWeight)
+        {
             items.add(item);
+            capacity -= itemWeight;
             return true;
         }
         return false;

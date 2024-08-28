@@ -29,9 +29,6 @@ public class FloorRobot extends Robot
             if (super.getRoom() == item.myRoom())
             {
                 Simulation.deliver(item);
-                List<Item> remainingItems = super.getItems();
-                remainingItems.remove(item);
-                super.setItems(remainingItems);
                 if (item instanceof Parcel parcel)
                 {
                     this.setCapacity(this.getCapacity() + parcel.myWeight());

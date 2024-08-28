@@ -99,7 +99,6 @@ public abstract class RobotsController
             {
                 iter.remove();
             }
-
         }
     }
 }
