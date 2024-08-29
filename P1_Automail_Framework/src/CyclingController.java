@@ -73,7 +73,7 @@ public class CyclingController extends RobotsController
                 Robot robot = super.getIdleRobots().remove();
                 loadRobot(fwei, robot);
                 // Room order for left-to-right delivery
-                robot.sort();
+                robot.sortLtoR();
                 List<Robot> activeRobots = super.getActiveRobots();
                 activeRobots.add(robot);
                 super.setActiveRobots(activeRobots);

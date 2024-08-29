@@ -6,10 +6,9 @@ import java.util.*;
  */
 public class FloorRobot extends Robot
 {
-    private int targetRoom;
-    private boolean waiting = false;
+    private int targetRoom = 1;
     private boolean movingToCR = false;
-    private Queue<ColumnRobot> signals = new LinkedList<>();
+    private List<Integer> signals = new ArrayList<>();
 
     /**
      * Constructor
@@ -19,10 +18,10 @@ public class FloorRobot extends Robot
     /**
      * getters and setters
      */
-    public boolean isWaiting() {return waiting;}
-    public Queue<ColumnRobot> getSignals() {return signals;}
-    public void setSignals(Queue<ColumnRobot> signals) {this.signals = signals;}
+    public List<Integer> getSignals() {return signals;}
+//    public void setSignals(Queue<Integer> signals) {this.signals = signals;}
     public boolean isMovingToCR() {return movingToCR;}
+    public int getTargetRoom() {return targetRoom;}
     public void setMovingToCR(boolean movingToCR) {this.movingToCR = movingToCR;}
 
     /**
@@ -33,56 +32,70 @@ public class FloorRobot extends Robot
     @Override
     public void engine(RobotsController robotsController)
     {
-        if (movingToCR)
+        if (super.isEmpty() && movingToCR)
         {
-            waiting = false;
+            System.out.println("Signal empty? " + this.signals.toString());
             if (super.getRoom() < targetRoom)
             {
                 super.move(Direction.RIGHT, robotsController);
             }
-            else
+            else if (super.getRoom() > targetRoom)
             {
                 super.move(Direction.LEFT, robotsController);
             }
+            else
+            {
+                movingToCR = false;
+            }
         }
         // If still has items, deliver them all
-        else if (!super.getItems().isEmpty())
+        else if (!super.isEmpty())
         {
+            System.out.println("signal empty? " + this.signals.toString());
             movingToCR = false;
-            waiting = false;
-            Item item = super.getItems().removeFirst();
-            targetRoom = item.myRoom();
-            if (super.getRoom() == targetRoom)
+            if (super.getRoom() == super.getItems().getFirst().myRoom())
             {
-                Simulation.deliver(item);
-                super.getItems().remove(item);
-                if (item instanceof Parcel parcel)
+                //then deliver all relevant items to that room
+                do
                 {
-                    this.setCapacity(this.getCapacity() + parcel.myWeight());
-                }
+                    Item deliverItem = super.getItems().removeFirst();
+                    int itemWeight = deliverItem instanceof Parcel p ? p.myWeight() : 0;
+                    super.setCapacity(super.getCapacity() + itemWeight);
+                    Simulation.deliver(deliverItem);
+                } while (!super.getItems().isEmpty() && super.getRoom() == super.getItems().getFirst().myRoom());
             }
-            else if (super.getRoom() < targetRoom)
+            else if (super.getRoom() < super.getItems().getFirst().myRoom())
             {
                 super.move(Direction.RIGHT, robotsController);
             }
-            else
+            else if (super.getRoom() > super.getItems().getFirst().myRoom())
             {
                 super.move(Direction.LEFT, robotsController);
             }
         }
         // If robot has no items
-        else
+        else if (super.isEmpty() && !movingToCR)
         {
-            waiting = true;
+            System.out.println(this.getId() + " " + this.signals.toString() + " ");
+            Building building = Building.getBuilding();
             // if a robot sends a signal to me, move to it
-            if (!signals.isEmpty() && !movingToCR)
+            if (!this.signals.isEmpty() && building.isOccupied(super.getFloor(), signals.getFirst() + 1))
             {
-                ColumnRobot cr = signals.remove();
-                waiting = false;
+                System.out.println(this.getId() + " " + this.signals.toString() + " ");
+                targetRoom = signals.removeFirst();
+                System.out.println(this.getId() + " " + this.signals.toString() + " ");
                 movingToCR = true;
-                targetRoom = cr.getRoom() == 0 ? 1 : Building.getBuilding().NUMROOMS;
+                if (super.getRoom() < targetRoom)
+                {
+                    super.move(Direction.RIGHT, robotsController);
+                }
+                else if (super.getRoom() > targetRoom)
+                {
+                    super.move(Direction.LEFT, robotsController);
+                }
             }
             // else, do nothing
         }
     }
+
 }

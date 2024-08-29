@@ -93,7 +93,7 @@ public class BuildingGrid
     {
         String sfinal;
         // Move up in the lift
-        if (room == 0 || room == Building.getBuilding().NUMROOMS+1)
+        if (room == 0 || room == Building.getBuilding().NUMROOMS + 1)
         {
             sfinal = s.isEmpty() ? "#" : s;  // ladder
         }
@@ -103,6 +103,7 @@ public class BuildingGrid
             sfinal = format(" Rm %d.%d%s", floor, room, tail); // door
         }
         tm.setValueAt(sfinal, Building.getBuilding().NUMFLOORS - floor, room + 1);
+//        System.out.println((Building.getBuilding().NUMFLOORS - floor) + " " + room + 1);
     }
 
 }

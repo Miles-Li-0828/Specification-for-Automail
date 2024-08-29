@@ -15,28 +15,28 @@ public class ColumnRobot extends Robot
         FlooringController flooringController = (FlooringController)robotsController;
 
         // If this robot contains items, move to the corresponded floor
-        if (!this.getItems().isEmpty())
+        if (!this.isEmpty())
         {
-            int targetFloor = this.getItems().getFirst().myFloor();
-            if (super.getFloor() < targetFloor)
+            if (this.getFloor() != this.getItems().getFirst().myFloor())
             {
                 super.move(Direction.UP, robotsController);
             }
-            else if (super.getFloor() > targetFloor)
+
+            if (this.getFloor() == this.getItems().getFirst().myFloor())
             {
-                super.move(Direction.DOWN, robotsController);
-            }
-            else
-            {
+                Building building = Building.getBuilding();
+
                 // 1 floor different
                 FloorRobot fr = (FloorRobot) flooringController.getFloorRobots().get(super.getFloor() - 1);
-                // If robot next to me, transfer
-                if (super.getRoom() == 0 && fr.getRoom() == 1 && fr.isWaiting())
+                if (super.getId().equals("R1") &&
+                        building.isOccupied(super.getFloor(), super.getRoom() + 1)
+                        && fr.isEmpty() && fr.getTargetRoom() == super.getRoom() + 1)
                 {
                     transfer(fr);
                 }
-                else if (super.getRoom() == Building.getBuilding().NUMROOMS + 1 &&
-                        fr.getRoom() == Building.getBuilding().NUMROOMS && fr.isWaiting())
+                else if (super.getId().equals("R2") &&
+                        building.isOccupied(super.getFloor(), super.getRoom() - 1)
+                        && fr.isEmpty() && fr.getTargetRoom() == super.getRoom() - 1)
                 {
                     transfer(fr);
                 }
@@ -47,7 +47,7 @@ public class ColumnRobot extends Robot
                 }
             }
         }
-        else
+        else if (this.isEmpty())
         {
             super.move(Direction.DOWN, robotsController);
         }
@@ -60,14 +60,13 @@ public class ColumnRobot extends Robot
      */
     void transfer(Robot robot)
     {
-        if (robot instanceof FloorRobot fr && fr.isWaiting())
+        if (robot instanceof FloorRobot fr && fr.isEmpty())
         {
             // Transfers every item assuming receiving robot has capacity
             robot.setItems(super.getItems());
             robot.setCapacity(super.getCapacity());
             super.setItems(new ArrayList<>());
             super.setCapacity(super.getMAX_CAPACITY());
-            fr.setMovingToCR(false);
         }
     }
 
@@ -76,7 +75,12 @@ public class ColumnRobot extends Robot
      */
     void sendSignal(FloorRobot fr)
     {
-        if (!fr.getSignals().contains(this))
-            fr.getSignals().add(this);
+        System.out.println("Send signal " + this.getId() + " " + this.getFloor() + " " + this.getItems().getFirst().myFloor());
+        int targetRoom = this.getRoom() == 0 ? 1 : Building.getBuilding().NUMROOMS;
+        if (!fr.getSignals().contains(targetRoom))
+        {
+            fr.getSignals().add(targetRoom);
+        }
+
     }
 }
