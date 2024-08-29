@@ -53,12 +53,6 @@ public class FlooringController extends RobotsController
             started = true;
         }
 
-        for (Robot robot: floorRobots)
-        {
-            System.out.println(robot.isEmpty());
-            robot.engine(this);
-        }
-
         // Simulation time unit
         for (Robot activeRobot : super.getActiveRobots())
         {
@@ -81,9 +75,11 @@ public class FlooringController extends RobotsController
             super.setIdleRobots(idleRobots);
         }
 
-
-
-
+        for (Robot robot: floorRobots)
+        {
+            System.out.println(robot.isEmpty());
+            robot.engine(this);
+        }
         return;
     }
 

@@ -46,6 +46,7 @@ public class FloorRobot extends Robot
             else
             {
                 movingToCR = false;
+                // signals.remove(targetRoom);
             }
         }
         // If still has items, deliver them all

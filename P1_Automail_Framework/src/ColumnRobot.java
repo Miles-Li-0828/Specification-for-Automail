@@ -81,6 +81,5 @@ public class ColumnRobot extends Robot
         {
             fr.getSignals().add(targetRoom);
         }
-
     }
 }
