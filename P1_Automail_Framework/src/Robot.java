@@ -44,6 +44,7 @@ public abstract class Robot
      * Getters
      */
     public int getFloor() { return floor; }
+    public void setRoom(int room) { this.room = room; }
     public int getRoom() { return room; }
     public String getId() { return id; }
     public int getCapacity() { return capacity; }
@@ -165,8 +166,12 @@ public abstract class Robot
      * Sort the letters.
      * * I don't think this should be done by robot*
      */
-    void sort()
+    void sortLtoR()
     {
         Collections.sort(items);
+    }
+    void sortRtoL()
+    {
+        Collections.sort(items, Collections.reverseOrder());
     }
 }

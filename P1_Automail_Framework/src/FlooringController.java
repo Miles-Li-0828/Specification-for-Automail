@@ -52,6 +52,13 @@ public class FlooringController extends RobotsController
             initialiseFloorRobots();
             started = true;
         }
+
+        for (Robot robot: floorRobots)
+        {
+            System.out.println(robot.isEmpty());
+            robot.engine(this);
+        }
+
         // Simulation time unit
         for (Robot activeRobot : super.getActiveRobots())
         {
@@ -74,8 +81,8 @@ public class FlooringController extends RobotsController
             super.setIdleRobots(idleRobots);
         }
 
-        for (Robot robot: floorRobots)
-            robot.engine(this);
+
+
 
         return;
     }
@@ -91,12 +98,13 @@ public class FlooringController extends RobotsController
             int fwei = super.getMailRoom().floorWithEarliestItem();
             Robot robot = super.getIdleRobots().remove();
             loadRobot(fwei, robot);
-            robot.sort();
+            robot.sortLtoR();
 
             List<Robot> activeRobots = super.getActiveRobots();
             activeRobots.add(robot);
             super.setActiveRobots(activeRobots);
-
+            System.out.println("Dispatch @ " + Simulation.now() +
+                    " of Robot " + robot.getId() + " with " + robot.numItems() + " item(s)");
             if (robot.getId().equals("R1"))
             {
                 robot.place(0, 0);
@@ -104,6 +112,7 @@ public class FlooringController extends RobotsController
             else if (robot.getId().equals("R2"))
             {
                 robot.place(0, Building.getBuilding().NUMROOMS + 1);
+                robot.sortRtoL();
             }
         }
     }

@@ -48,10 +48,10 @@ public class Simulation
         switch (mode)
         {
             case Mode.CYCLING:
-                this.robotsController = new CyclingController(numRobots, building.NUMFLOORS, robotCapacity);
+                this.robotsController = new CyclingController(numRobots, numFloors, robotCapacity);
                 break;
             case Mode.FLOORING:
-                this.robotsController = new FlooringController(numRobots, building.NUMFLOORS, robotCapacity);
+                this.robotsController = new FlooringController(numFloors + 2, numFloors, robotCapacity);
                 break;
         }
 
