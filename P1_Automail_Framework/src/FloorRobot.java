@@ -79,7 +79,7 @@ public class FloorRobot extends Robot
             System.out.println(this.getId() + " " + this.signals.toString() + " ");
             Building building = Building.getBuilding();
             // if a robot sends a signal to me, move to it
-            if (!this.signals.isEmpty() && building.isOccupied(super.getFloor(), signals.getFirst() + 1))
+            if (!this.signals.isEmpty())
             {
                 System.out.println(this.getId() + " " + this.signals.toString() + " ");
                 targetRoom = signals.removeFirst();

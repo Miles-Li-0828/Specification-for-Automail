@@ -41,7 +41,7 @@ public class ColumnRobot extends Robot
                     transfer(fr);
                 }
                 // else if robot is not next to me, send a signal to it
-                else
+                else if (fr.isEmpty() && !fr.isMovingToCR())
                 {
                     sendSignal(fr);
                 }
