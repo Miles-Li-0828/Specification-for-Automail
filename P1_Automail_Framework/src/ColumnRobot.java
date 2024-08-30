@@ -25,29 +25,29 @@ public class ColumnRobot extends Robot
             if (this.getFloor() == this.getItems().getFirst().myFloor())
             {
                 Building building = Building.getBuilding();
-
                 // 1 floor different
                 FloorRobot fr = (FloorRobot) flooringController.getFloorRobots().get(super.getFloor() - 1);
+
                 if (super.getId().equals("R1") &&
-                        building.isOccupied(super.getFloor(), super.getRoom() + 1)
-                        && fr.isEmpty() && fr.getTargetRoom() == super.getRoom() + 1)
+                        building.isOccupied(super.getFloor(), super.getRoom() + 1) &&
+                        fr.isEmpty() && !fr.isMovingToCR())
                 {
                     transfer(fr);
                 }
                 else if (super.getId().equals("R2") &&
-                        building.isOccupied(super.getFloor(), super.getRoom() - 1)
-                        && fr.isEmpty() && fr.getTargetRoom() == super.getRoom() - 1)
+                        building.isOccupied(super.getFloor(), super.getRoom() - 1) &&
+                        fr.isEmpty() && !fr.isMovingToCR())
                 {
                     transfer(fr);
                 }
                 // else if robot is not next to me, send a signal to it
-                else if (fr.isEmpty() && !fr.isMovingToCR())
+                else if (!fr.isMovingToCR())
                 {
                     sendSignal(fr);
                 }
             }
         }
-        else if (this.isEmpty())
+        else
         {
             super.move(Direction.DOWN, robotsController);
         }
@@ -76,9 +76,9 @@ public class ColumnRobot extends Robot
     void sendSignal(FloorRobot fr)
     {
         int targetRoom = this.getRoom() == 0 ? 1 : Building.getBuilding().NUMROOMS;
-        if (!fr.getSignals().contains(targetRoom))
+        if (!fr.getSignals().containsKey(targetRoom))
         {
-            fr.getSignals().add(targetRoom);
+            fr.getSignals().put(targetRoom, Simulation.now());
         }
     }
 }

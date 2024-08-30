@@ -28,31 +28,31 @@ public class CyclingController extends RobotsController
     /**
      * Time tick simulation
      */
-    @Override
-    public void tick()
-    {
-        // Simulation time unit
-        for (Robot activeRobot : super.getActiveRobots())
-        {
-            System.out.printf("About to tick: " + activeRobot.toString() + "\n");
-            activeRobot.engine(this);
-        }
-        robotDispatch();  // dispatch a robot if conditions are met
-        // These are returning robots who shouldn't be dispatched in the previous step
-        ListIterator<Robot> iter = super.getDeactivatingRobots().listIterator();
-        while (iter.hasNext())
-        {
-            // In timestamp order
-            Robot robot = iter.next();
-            iter.remove();
-            List<Robot> activeRobots = super.getActiveRobots();
-            Queue<Robot> idleRobots = super.getIdleRobots();
-            activeRobots.remove(robot);
-            idleRobots.add(robot);
-            super.setActiveRobots(activeRobots);
-            super.setIdleRobots(idleRobots);
-        }
-    }
+//    @Override
+//    public void tick()
+//    {
+//        // Simulation time unit
+//        for (Robot activeRobot : super.getActiveRobots())
+//        {
+//            System.out.printf("About to tick: " + activeRobot.toString() + "\n");
+//            activeRobot.engine(this);
+//        }
+//        robotDispatch();  // dispatch a robot if conditions are met
+//        // These are returning robots who shouldn't be dispatched in the previous step
+//        ListIterator<Robot> iter = super.getDeactivatingRobots().listIterator();
+//        while (iter.hasNext())
+//        {
+//            // In timestamp order
+//            Robot robot = iter.next();
+//            iter.remove();
+//            List<Robot> activeRobots = super.getActiveRobots();
+//            Queue<Robot> idleRobots = super.getIdleRobots();
+//            activeRobots.remove(robot);
+//            idleRobots.add(robot);
+//            super.setActiveRobots(activeRobots);
+//            super.setIdleRobots(idleRobots);
+//        }
+//    }
 
     /**
      * Dispatch the robots
@@ -69,16 +69,7 @@ public class CyclingController extends RobotsController
             int fwei = super.getMailRoom().floorWithEarliestItem();
             if (fwei >= 0)
             {
-                // Need an item or items to deliver, starting with earliest
-                Robot robot = super.getIdleRobots().remove();
-                loadRobot(fwei, robot);
-                // Room order for left-to-right delivery
-                robot.sortLtoR();
-                List<Robot> activeRobots = super.getActiveRobots();
-                activeRobots.add(robot);
-                super.setActiveRobots(activeRobots);
-                System.out.println("Dispatch @ " + Simulation.now() +
-                        " of Robot " + robot.getId() + " with " + robot.numItems() + " item(s)");
+                Robot robot = super.loadAndActivateRobot(fwei);
                 robot.place(0, 0);
             }
         }

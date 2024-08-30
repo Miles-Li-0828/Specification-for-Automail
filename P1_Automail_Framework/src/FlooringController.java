@@ -53,34 +53,13 @@ public class FlooringController extends RobotsController
             started = true;
         }
 
-        // Simulation time unit
-        for (Robot activeRobot : super.getActiveRobots())
-        {
-            System.out.printf("About to tick: " + activeRobot.toString() + "\n");
-            activeRobot.engine(this);
-        }
-        robotDispatch();  // dispatch a robot if conditions are met
-        // These are returning robots who shouldn't be dispatched in the previous step
-        ListIterator<Robot> iter = super.getDeactivatingRobots().listIterator();
-        while (iter.hasNext())
-        {
-            // In timestamp order
-            Robot robot = iter.next();
-            iter.remove();
-            List<Robot> activeRobots = super.getActiveRobots();
-            Queue<Robot> idleRobots = super.getIdleRobots();
-            activeRobots.remove(robot);
-            idleRobots.add(robot);
-            super.setActiveRobots(activeRobots);
-            super.setIdleRobots(idleRobots);
-        }
-
         for (Robot robot: floorRobots)
         {
-            System.out.println(robot.isEmpty());
             robot.engine(this);
         }
-        return;
+
+        super.tick();
+
     }
 
     @Override
@@ -89,26 +68,18 @@ public class FlooringController extends RobotsController
         // Dispatch all the robots in flooring case
         System.out.println("Dispatch at time = " + Simulation.now());
 
-        if (!super.getIdleRobots().isEmpty())
+        while (!super.getIdleRobots().isEmpty())
         {
             int fwei = super.getMailRoom().floorWithEarliestItem();
-            Robot robot = super.getIdleRobots().remove();
-            loadRobot(fwei, robot);
-            robot.sortLtoR();
-
-            List<Robot> activeRobots = super.getActiveRobots();
-            activeRobots.add(robot);
-            super.setActiveRobots(activeRobots);
-            System.out.println("Dispatch @ " + Simulation.now() +
-                    " of Robot " + robot.getId() + " with " + robot.numItems() + " item(s)");
-            if (robot.getId().equals("R1"))
+            if (fwei >= 0)
             {
-                robot.place(0, 0);
-            }
-            else if (robot.getId().equals("R2"))
-            {
-                robot.place(0, Building.getBuilding().NUMROOMS + 1);
-                robot.sortRtoL();
+                Robot robot = super.loadAndActivateRobot(fwei);
+                if (robot.getId().equals("R1")) {
+                    robot.place(0, 0);
+                } else if (robot.getId().equals("R2")) {
+                    robot.place(0, Building.getBuilding().NUMROOMS + 1);
+                    robot.sortRtoL();
+                }
             }
         }
     }

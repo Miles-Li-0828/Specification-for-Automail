@@ -59,7 +59,21 @@ public abstract class RobotsController
     /**
      * Time tick simulation
      */
-    public abstract void tick();
+    public void tick() { // Simulation time unit
+        for (Robot activeRobot : activeRobots) {
+            System.out.printf("About to tick: " + activeRobot.toString() + "\n");
+            activeRobot.engine(this);
+        }
+        robotDispatch();  // dispatch a robot if conditions are met
+        // These are returning robots who shouldn't be dispatched in the previous step
+        ListIterator<Robot> iter = deactivatingRobots.listIterator();
+        while (iter.hasNext()) {  // In timestamp order
+            Robot robot = iter.next();
+            iter.remove();
+            activeRobots.remove(robot);
+            idleRobots.add(robot);
+        }
+    }
 
     /**
      * Dispatch the robots
@@ -100,5 +114,16 @@ public abstract class RobotsController
                 iter.remove();
             }
         }
+    }
+
+    protected Robot loadAndActivateRobot(int fwei) {
+        Robot robot = idleRobots.remove();
+        loadRobot(fwei, robot);
+        // Room order for left to right delivery
+        robot.sortLtoR();
+        activeRobots.add(robot);
+        System.out.println("Dispatch @ " + Simulation.now() +
+                " of Robot " + robot.getId() + " with " + robot.numItems() + " item(s)");
+        return robot;
     }
 }

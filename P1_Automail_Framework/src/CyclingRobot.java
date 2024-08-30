@@ -40,13 +40,7 @@ public class CyclingRobot extends Robot
                 if (super.getRoom() == super.getItems().getFirst().myRoom())
                 {
                     //then deliver all relevant items to that room
-                    do
-                    {
-                        Item deliverItem = super.getItems().removeFirst();
-                        int itemWeight = deliverItem instanceof Parcel p ? p.myWeight() : 0;
-                        super.setCapacity(super.getCapacity() + itemWeight);
-                        Simulation.deliver(deliverItem);
-                    } while (!super.getItems().isEmpty() && super.getRoom() == super.getItems().getFirst().myRoom());
+                    super.deliverAllItemsInCurrentRoom();
                 }
                 else
                 {

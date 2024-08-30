@@ -36,7 +36,7 @@ public abstract class Robot
 
     public String toString()
     {
-        return "Id: " + id + " Floor: " + floor + ", Room: " + room + ", #items: " + numItems() + ", capacity: " + capacity ;
+        return "Id: " + id + ", Floor: " + floor + ", Room: " + room + ", #items: " + numItems() + ", capacity: " + capacity ;
     }
 
 
@@ -160,6 +160,15 @@ public abstract class Robot
             return true;
         }
         return false;
+    }
+
+    protected void deliverAllItemsInCurrentRoom() {
+        do {
+            Item deliverItem = items.removeFirst();
+            int itemWeight = (deliverItem instanceof Parcel) ? ((Parcel) deliverItem).myWeight() : 0;
+            capacity += itemWeight;
+            Simulation.deliver(deliverItem);
+        } while (!items.isEmpty() && room == items.getFirst().myRoom());
     }
 
     /**

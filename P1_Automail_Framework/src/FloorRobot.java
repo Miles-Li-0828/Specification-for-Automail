@@ -8,7 +8,7 @@ public class FloorRobot extends Robot
 {
     private int targetRoom = 1;
     private boolean movingToCR = false;
-    private List<Integer> signals = new ArrayList<>();
+    private Map<Integer, Integer> signals = new HashMap<>();
 
     /**
      * Constructor
@@ -18,12 +18,25 @@ public class FloorRobot extends Robot
     /**
      * getters and setters
      */
-    public List<Integer> getSignals() {return signals;}
-//    public void setSignals(Queue<Integer> signals) {this.signals = signals;}
+    public Map<Integer, Integer> getSignals() {return signals;}
     public boolean isMovingToCR() {return movingToCR;}
     public int getTargetRoom() {return targetRoom;}
-    public void setMovingToCR(boolean movingToCR) {this.movingToCR = movingToCR;}
 
+    public void moveToCRDirection(RobotsController robotsController)
+    {
+        if (super.getRoom() < targetRoom)
+        {
+            super.move(Direction.RIGHT, robotsController);
+        }
+        else if (super.getRoom() > targetRoom)
+        {
+            super.move(Direction.LEFT, robotsController);
+        }
+        if (super.getRoom() == targetRoom)
+        {
+            movingToCR = false;
+        }
+    }
     /**
      * Robot engine for Flooring Mode
      *
@@ -34,19 +47,7 @@ public class FloorRobot extends Robot
     {
         if (super.isEmpty() && movingToCR)
         {
-            if (super.getRoom() < targetRoom)
-            {
-                super.move(Direction.RIGHT, robotsController);
-            }
-            else if (super.getRoom() > targetRoom)
-            {
-                super.move(Direction.LEFT, robotsController);
-            }
-            else
-            {
-                movingToCR = false;
-                // signals.remove(targetRoom);
-            }
+            moveToCRDirection(robotsController);
         }
         // If still has items, deliver them all
         else if (!super.isEmpty())
@@ -55,13 +56,7 @@ public class FloorRobot extends Robot
             if (super.getRoom() == super.getItems().getFirst().myRoom())
             {
                 //then deliver all relevant items to that room
-                do
-                {
-                    Item deliverItem = super.getItems().removeFirst();
-                    int itemWeight = deliverItem instanceof Parcel p ? p.myWeight() : 0;
-                    super.setCapacity(super.getCapacity() + itemWeight);
-                    Simulation.deliver(deliverItem);
-                } while (!super.getItems().isEmpty() && super.getRoom() == super.getItems().getFirst().myRoom());
+                super.deliverAllItemsInCurrentRoom();
             }
             else if (super.getRoom() < super.getItems().getFirst().myRoom())
             {
@@ -75,21 +70,23 @@ public class FloorRobot extends Robot
         // If robot has no items
         else if (super.isEmpty() && !movingToCR)
         {
-            System.out.println(this.getId() + " " + this.signals.toString() + " ");
-            Building building = Building.getBuilding();
             // if a robot sends a signal to me, move to it
             if (!this.signals.isEmpty())
             {
-                targetRoom = signals.removeFirst();
+                if (signals.size() == 2)
+                {
+                    targetRoom = signals.get(1) <= signals.get(Building.getBuilding().NUMROOMS) ?
+                            1 : Building.getBuilding().NUMROOMS;
+                    signals.remove(targetRoom);
+                }
+                else
+                {
+                    Map.Entry<Integer, Integer> signalEntry = signals.entrySet().iterator().next();
+                    targetRoom = signalEntry.getKey();
+                    signals.remove(targetRoom);
+                }
                 movingToCR = true;
-                if (super.getRoom() < targetRoom)
-                {
-                    super.move(Direction.RIGHT, robotsController);
-                }
-                else if (super.getRoom() > targetRoom)
-                {
-                    super.move(Direction.LEFT, robotsController);
-                }
+                moveToCRDirection(robotsController);
             }
             // else, do nothing
         }
