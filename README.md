@@ -104,6 +104,7 @@ To execute the Automail simulation, follow these steps:
 
 For any questions or issues, please contact the project contributors:
 
-- **Miles Li**: miles.li@example.com
-- **Skylar Khant**: skylar.khant@example.com
-- **Ngoc Thanh Lam Nguyen**: nguyen.lam@example.com
+- **Miles Li**: liyueming828@gmail.com
+- **Skylar Khant**: kyishink@student.unimelb.edu.au
+- **Ngoc Thanh Lam Nguyen**: ngocthanhlam@student.unimelb.edu.au
+
