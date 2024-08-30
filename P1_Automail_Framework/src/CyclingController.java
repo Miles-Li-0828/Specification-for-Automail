@@ -25,34 +25,6 @@ public class CyclingController extends RobotsController
         super.setIdleRobots(idleRobots);
     }
 
-    /**
-     * Time tick simulation
-     */
-//    @Override
-//    public void tick()
-//    {
-//        // Simulation time unit
-//        for (Robot activeRobot : super.getActiveRobots())
-//        {
-//            System.out.printf("About to tick: " + activeRobot.toString() + "\n");
-//            activeRobot.engine(this);
-//        }
-//        robotDispatch();  // dispatch a robot if conditions are met
-//        // These are returning robots who shouldn't be dispatched in the previous step
-//        ListIterator<Robot> iter = super.getDeactivatingRobots().listIterator();
-//        while (iter.hasNext())
-//        {
-//            // In timestamp order
-//            Robot robot = iter.next();
-//            iter.remove();
-//            List<Robot> activeRobots = super.getActiveRobots();
-//            Queue<Robot> idleRobots = super.getIdleRobots();
-//            activeRobots.remove(robot);
-//            idleRobots.add(robot);
-//            super.setActiveRobots(activeRobots);
-//            super.setIdleRobots(idleRobots);
-//        }
-//    }
 
     /**
      * Dispatch the robots

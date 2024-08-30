@@ -6,9 +6,9 @@
  */
 public abstract class Item implements Comparable<Item>
 {
-    private int floor;
-    private int room;
-    private int arrival;
+    private final int floor;
+    private final int room;
+    private final int arrival;
 
     /**
      * Constructor of Item
