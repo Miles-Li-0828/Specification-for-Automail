@@ -41,7 +41,7 @@ public class ColumnRobot extends Robot
                     transfer(fr);
                 }
                 // else if robot is not next to me, send a signal to it
-                else
+                else if (fr.isEmpty() && !fr.isMovingToCR())
                 {
                     sendSignal(fr);
                 }
@@ -75,7 +75,6 @@ public class ColumnRobot extends Robot
      */
     void sendSignal(FloorRobot fr)
     {
-        System.out.println("Send signal " + this.getId() + " " + this.getFloor() + " " + this.getItems().getFirst().myFloor());
         int targetRoom = this.getRoom() == 0 ? 1 : Building.getBuilding().NUMROOMS;
         if (!fr.getSignals().contains(targetRoom))
         {

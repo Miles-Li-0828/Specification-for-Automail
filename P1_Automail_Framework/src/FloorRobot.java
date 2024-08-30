@@ -34,7 +34,6 @@ public class FloorRobot extends Robot
     {
         if (super.isEmpty() && movingToCR)
         {
-            System.out.println("Signal empty? " + this.signals.toString());
             if (super.getRoom() < targetRoom)
             {
                 super.move(Direction.RIGHT, robotsController);
@@ -52,7 +51,6 @@ public class FloorRobot extends Robot
         // If still has items, deliver them all
         else if (!super.isEmpty())
         {
-            System.out.println("signal empty? " + this.signals.toString());
             movingToCR = false;
             if (super.getRoom() == super.getItems().getFirst().myRoom())
             {
@@ -80,11 +78,9 @@ public class FloorRobot extends Robot
             System.out.println(this.getId() + " " + this.signals.toString() + " ");
             Building building = Building.getBuilding();
             // if a robot sends a signal to me, move to it
-            if (!this.signals.isEmpty() && building.isOccupied(super.getFloor(), signals.getFirst() + 1))
+            if (!this.signals.isEmpty())
             {
-                System.out.println(this.getId() + " " + this.signals.toString() + " ");
                 targetRoom = signals.removeFirst();
-                System.out.println(this.getId() + " " + this.signals.toString() + " ");
                 movingToCR = true;
                 if (super.getRoom() < targetRoom)
                 {
