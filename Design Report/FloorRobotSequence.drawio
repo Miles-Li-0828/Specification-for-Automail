@@ -1,0 +1,213 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.7.5 Chrome/126.0.6478.183 Electron/31.3.0 Safari/537.36" version="24.7.5">
+  <diagram name="Page-1" id="7PToqkneeD9nZiC2fNRR">
+    <mxGraphModel dx="2659" dy="980" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="Y1eAxP1NSGM78JbsiO_W-12" value="ClomnRobot" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="1" vertex="1">
+          <mxGeometry x="450" y="190" width="100" height="730" as="geometry" />
+        </mxCell>
+        <mxCell id="Y1eAxP1NSGM78JbsiO_W-22" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="1" vertex="1">
+          <mxGeometry x="495" y="268" width="10" height="382" as="geometry" />
+        </mxCell>
+        <mxCell id="Y1eAxP1NSGM78JbsiO_W-1" value="FlooringController" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="1" vertex="1">
+          <mxGeometry x="80" y="160" width="100" height="780" as="geometry" />
+        </mxCell>
+        <mxCell id="Y1eAxP1NSGM78JbsiO_W-3" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="Y1eAxP1NSGM78JbsiO_W-1" vertex="1">
+          <mxGeometry x="45" y="60" width="10" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="Y1eAxP1NSGM78JbsiO_W-2" value="Floor-Assigned Robot Use Case:&lt;div&gt;1. One FloorRobot get Items and Deliver them to target rooms&lt;/div&gt;&lt;div&gt;2. One FloorRobot wait for ColumnRobot and get Items from ColumnRobot&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="-55" y="60" width="420" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="Y1eAxP1NSGM78JbsiO_W-5" value="FloorRobot" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="1" vertex="1">
+          <mxGeometry x="240" y="160" width="100" height="749" as="geometry" />
+        </mxCell>
+        <mxCell id="Y1eAxP1NSGM78JbsiO_W-7" value="engine()" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;entryX=0;entryY=0;entryDx=0;entryDy=5;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="135" y="270.0000000000032" as="sourcePoint" />
+            <mxPoint x="285" y="270.0000000000032" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Y1eAxP1NSGM78JbsiO_W-9" value="alt" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;" parent="1" vertex="1">
+          <mxGeometry x="159.32" y="280" width="470" height="590" as="geometry" />
+        </mxCell>
+        <mxCell id="Y1eAxP1NSGM78JbsiO_W-10" value="[Robot is Empty]" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="159.3181818181818" y="318" width="110" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Y1eAxP1NSGM78JbsiO_W-14" value="alt" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;" parent="1" vertex="1">
+          <mxGeometry x="180" y="350" width="430" height="290" as="geometry" />
+        </mxCell>
+        <mxCell id="Y1eAxP1NSGM78JbsiO_W-15" value="[Robot is moving to&lt;div style=&quot;font-size: 9px;&quot;&gt;&amp;nbsp;a ColumnRobot]&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=9;fontFamily=Helvetica;fontColor=default;" parent="1" vertex="1">
+          <mxGeometry x="170" y="370" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Y1eAxP1NSGM78JbsiO_W-16" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="1" vertex="1">
+          <mxGeometry x="290" y="380" width="10" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Y1eAxP1NSGM78JbsiO_W-17" value="move(targetRoomDirection)" style="html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=0;rounded=0;" parent="1" target="Y1eAxP1NSGM78JbsiO_W-16" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="295" y="360" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="330" y="360" />
+              <mxPoint x="330" y="390" />
+            </Array>
+            <mxPoint x="415" y="370" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Y1eAxP1NSGM78JbsiO_W-18" value="" style="endArrow=none;dashed=1;html=1;rounded=0;exitX=0.007;exitY=0.475;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.995;entryY=0.276;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" target="Y1eAxP1NSGM78JbsiO_W-14" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="179.99999999999991" y="432" as="sourcePoint" />
+            <mxPoint x="579" y="432" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Y1eAxP1NSGM78JbsiO_W-19" value="[Robot is not moving to&lt;div style=&quot;font-size: 9px;&quot;&gt;&amp;nbsp;a ColumnRobot and a&lt;/div&gt;&lt;div style=&quot;font-size: 9px;&quot;&gt;ColumnbRobot is waiting]&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=9;fontFamily=Helvetica;fontColor=default;" parent="1" vertex="1">
+          <mxGeometry x="170" y="425" width="130" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="Y1eAxP1NSGM78JbsiO_W-20" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="1" vertex="1">
+          <mxGeometry x="290" y="524" width="10" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Y1eAxP1NSGM78JbsiO_W-21" value="move(TargetRoomDirection)" style="html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=0;rounded=0;" parent="1" target="Y1eAxP1NSGM78JbsiO_W-20" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="295" y="504" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="325" y="534" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Y1eAxP1NSGM78JbsiO_W-24" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="1" vertex="1">
+          <mxGeometry x="500" y="464" width="10" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Y1eAxP1NSGM78JbsiO_W-25" value="sendSignal(Floorrobot)" style="html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=0;rounded=0;" parent="1" target="Y1eAxP1NSGM78JbsiO_W-24" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="505" y="444" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="535" y="474" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Y1eAxP1NSGM78JbsiO_W-26" value="targetRoom" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;" parent="1" target="Y1eAxP1NSGM78JbsiO_W-6" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="495" y="494.5" as="sourcePoint" />
+            <mxPoint x="415" y="494.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Y1eAxP1NSGM78JbsiO_W-27" value="" style="endArrow=none;dashed=1;html=1;rounded=0;exitX=-0.002;exitY=0.769;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.998;entryY=0.762;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="179.13999999999987" y="570.01" as="sourcePoint" />
+            <mxPoint x="609.1399999999999" y="567.98" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Y1eAxP1NSGM78JbsiO_W-28" value="[Robot is next to a&lt;div&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;ColumnRobot]&lt;/span&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=9;fontFamily=Helvetica;fontColor=default;" parent="1" vertex="1">
+          <mxGeometry x="170" y="564" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Y1eAxP1NSGM78JbsiO_W-29" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="1" vertex="1">
+          <mxGeometry x="500" y="600" width="10" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Y1eAxP1NSGM78JbsiO_W-30" value="transfer(FloorRobot)" style="html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=0;rounded=0;" parent="1" target="Y1eAxP1NSGM78JbsiO_W-29" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="505" y="580" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="535" y="610" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Y1eAxP1NSGM78JbsiO_W-31" value="Items" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;" parent="1" target="Y1eAxP1NSGM78JbsiO_W-6" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="500" y="614.5" as="sourcePoint" />
+            <mxPoint x="420" y="614.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Y1eAxP1NSGM78JbsiO_W-32" value="" style="endArrow=none;dashed=1;html=1;rounded=0;exitX=0.006;exitY=0.497;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.995;entryY=0.499;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="164.49000000000032" y="660" as="sourcePoint" />
+            <mxPoint x="629.3200000000003" y="661.1800000000001" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Y1eAxP1NSGM78JbsiO_W-33" value="[Robot is not Empty]" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="154.99818181818182" y="660" width="130" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Y1eAxP1NSGM78JbsiO_W-34" value="Simulation" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="1" vertex="1">
+          <mxGeometry x="-70" y="140" width="100" height="790" as="geometry" />
+        </mxCell>
+        <mxCell id="Y1eAxP1NSGM78JbsiO_W-35" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="Y1eAxP1NSGM78JbsiO_W-34" vertex="1">
+          <mxGeometry x="44" y="50" width="10" height="670" as="geometry" />
+        </mxCell>
+        <mxCell id="Y1eAxP1NSGM78JbsiO_W-36" value="run()" style="html=1;verticalAlign=bottom;startArrow=oval;endArrow=block;startSize=8;curved=0;rounded=0;" parent="Y1eAxP1NSGM78JbsiO_W-34" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-240" y="50" as="sourcePoint" />
+            <mxPoint x="44" y="50" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Y1eAxP1NSGM78JbsiO_W-40" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="Y1eAxP1NSGM78JbsiO_W-34" vertex="1">
+          <mxGeometry x="50" y="600" width="10" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Y1eAxP1NSGM78JbsiO_W-38" value="alt" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;" parent="1" vertex="1">
+          <mxGeometry x="180" y="690" width="310" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="Y1eAxP1NSGM78JbsiO_W-39" value="[Robot is at target room&lt;span style=&quot;background-color: initial;&quot;&gt;]&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=9;fontFamily=Helvetica;fontColor=default;" parent="1" vertex="1">
+          <mxGeometry x="175" y="720" width="120" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="Y1eAxP1NSGM78JbsiO_W-41" value="deliver(Item)" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;entryX=1;entryY=0;entryDx=0;entryDy=5;" parent="1" target="Y1eAxP1NSGM78JbsiO_W-40" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="285" y="745" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Y1eAxP1NSGM78JbsiO_W-43" value="" style="endArrow=none;dashed=1;html=1;rounded=0;exitX=0.013;exitY=0.368;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.987;entryY=0.353;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="Y1eAxP1NSGM78JbsiO_W-38" target="Y1eAxP1NSGM78JbsiO_W-38" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="400" y="660" as="sourcePoint" />
+            <mxPoint x="486" y="771" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Y1eAxP1NSGM78JbsiO_W-44" value="[Robot is not&amp;nbsp;&lt;div&gt;at target room&lt;span style=&quot;background-color: initial;&quot;&gt;]&lt;/span&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=9;fontFamily=Helvetica;fontColor=default;" parent="1" vertex="1">
+          <mxGeometry x="175" y="770" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Y1eAxP1NSGM78JbsiO_W-6" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="1" vertex="1">
+          <mxGeometry x="285" y="250" width="10" height="630" as="geometry" />
+        </mxCell>
+        <mxCell id="Y1eAxP1NSGM78JbsiO_W-48" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="1" vertex="1">
+          <mxGeometry x="290" y="810" width="10" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Y1eAxP1NSGM78JbsiO_W-49" value="move(TargetRoomDirection)" style="html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=0;rounded=0;" parent="1" target="Y1eAxP1NSGM78JbsiO_W-48" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="295" y="790" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="325" y="820" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Y1eAxP1NSGM78JbsiO_W-50" value="new FloorRobot(this)" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;exitX=1;exitY=0;exitDx=0;exitDy=5;exitPerimeter=0;" parent="1" source="Y1eAxP1NSGM78JbsiO_W-3" target="Y1eAxP1NSGM78JbsiO_W-5" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="470" y="520" as="sourcePoint" />
+            <mxPoint x="390" y="520" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Y1eAxP1NSGM78JbsiO_W-52" value="new ColumnRobot(this)" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;" parent="1" target="Y1eAxP1NSGM78JbsiO_W-12" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="140" y="240" as="sourcePoint" />
+            <mxPoint x="300" y="235" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Y1eAxP1NSGM78JbsiO_W-53" value="loop" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;" parent="1" vertex="1">
+          <mxGeometry x="-150" y="250" width="860" height="640" as="geometry" />
+        </mxCell>
+        <mxCell id="Y1eAxP1NSGM78JbsiO_W-23" value="engine()" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;exitX=0.55;exitY=0.202;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="135" y="274.99999999999994" as="sourcePoint" />
+            <mxPoint x="495" y="274.99999999999994" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Y1eAxP1NSGM78JbsiO_W-37" value="tick()" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;" parent="1" edge="1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="-20" y="260" as="sourcePoint" />
+            <mxPoint x="125" y="260" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Y1eAxP1NSGM78JbsiO_W-54" value="[Still have Items&lt;div&gt;&amp;nbsp;left to deliver]&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="-160.00181818181818" y="275" width="110" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Y1eAxP1NSGM78JbsiO_W-55" value="FLOORING mode" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;" parent="1" vertex="1">
+          <mxGeometry x="-270" y="120" width="1030" height="780" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
