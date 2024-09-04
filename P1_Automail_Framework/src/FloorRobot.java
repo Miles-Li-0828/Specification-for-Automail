@@ -8,6 +8,8 @@ public class FloorRobot extends Robot
 {
     private int targetRoom = 1;
     private boolean movingToCR = false;
+    private boolean waitingForItems = false;
+    private int iniItemsTimer = 0;
     private Map<Integer, Integer> signals = new HashMap<>();
 
     /**
@@ -21,6 +23,7 @@ public class FloorRobot extends Robot
     public Map<Integer, Integer> getSignals() {return signals;}
     public boolean isMovingToCR() {return movingToCR;}
     public int getTargetRoom() {return targetRoom;}
+    public void setWaitingForItems(boolean waitingForItems) {this.waitingForItems = waitingForItems;}
 
     public void moveToCRDirection(RobotsController robotsController)
     {
@@ -45,6 +48,18 @@ public class FloorRobot extends Robot
     @Override
     public void engine(RobotsController robotsController)
     {
+        // Initialise the items
+        if (waitingForItems && iniItemsTimer == 0)
+        {
+            iniItemsTimer++;
+            return;
+        }
+        else
+        {
+            waitingForItems = false;
+            iniItemsTimer = 0;
+        }
+
         if (super.isEmpty() && movingToCR)
         {
             moveToCRDirection(robotsController);

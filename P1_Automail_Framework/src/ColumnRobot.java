@@ -33,12 +33,14 @@ public class ColumnRobot extends Robot
                         fr.isEmpty() && !fr.isMovingToCR())
                 {
                     transfer(fr);
+                    fr.setWaitingForItems(true);
                 }
                 else if (super.getId().equals("R2") &&
                         building.isOccupied(super.getFloor(), super.getRoom() - 1) &&
                         fr.isEmpty() && !fr.isMovingToCR())
                 {
                     transfer(fr);
+                    fr.setWaitingForItems(true);
                 }
                 // else if robot is not next to me, send a signal to it
                 else if (!fr.isMovingToCR())
